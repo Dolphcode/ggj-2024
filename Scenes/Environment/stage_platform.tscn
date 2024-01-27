@@ -6,4 +6,3 @@
 script = ExtResource("1_qsv5h")
 dimensions = Vector2i(1, 1)
 plat_scale = 2
-world_size = 1.0

@@ -1,5 +1,17 @@
-[gd_scene format=3 uid="uid://0uewps4rbocq"]
+[gd_scene load_steps=3 format=3 uid="uid://0uewps4rbocq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ey3j0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_adkqr"]
+size = Vector3(1, 1, 1.99356)
 
 [node name="GridTile" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1, 1, 2)
+material = SubResource("StandardMaterial3D_ey3j0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_adkqr")
