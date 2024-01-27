@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=2 format=3 uid="uid://5qid108f1ska"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/stage_platform.gd" id="1_7yoov"]
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_7yoov")
