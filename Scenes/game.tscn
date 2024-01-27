@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=6 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="2_pwj11"]
 [ext_resource type="PackedScene" uid="uid://hddej23e7axi" path="res://Enemies/Scenes/parent_enemy.tscn" id="3_7yumb"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
-[ext_resource type="Script" path="res://Scripts/Levels/stage_base.gd" id="5_72neb"]
 
 [sub_resource type="Environment" id="Environment_sprrj"]
 background_mode = 2
@@ -27,9 +26,5 @@ plat_scale = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("5_72neb")
-grid_info = "res://Assets/Grid Info/sample.txt"
 
 [editable path="StagePlatform"]
