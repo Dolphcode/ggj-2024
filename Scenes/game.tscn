@@ -8,6 +8,7 @@
 [sub_resource type="Environment" id="Environment_sprrj"]
 background_mode = 2
 ambient_light_source = 1
+reflected_light_source = 1
 
 [node name="Game" type="Node3D"]
 
@@ -17,10 +18,12 @@ ambient_light_source = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ParentEnemy" parent="." instance=ExtResource("3_7yumb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 0)
-
-[node name="StagePlatform" parent="." instance=ExtResource("4_hrlmn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9425, 4.81142, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
+
+[node name="StagePlatform" parent="." instance=ExtResource("4_hrlmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1)
+dimensions = Vector2i(4, 3)
+plat_scale = 5

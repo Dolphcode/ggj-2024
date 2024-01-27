@@ -7,13 +7,12 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_apsq5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jcfj3"]
-radius = 0.40273
-height = 0.805461
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_efxwq"]
+length = 2.0
 
 [node name="ParentEnemy" type="CharacterBody3D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 17
 script = ExtResource("1_561t2")
 
 [node name="CollisionBox" type="CollisionShape3D" parent="."]
@@ -33,10 +32,18 @@ texture = ExtResource("2_ga28j")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="DetectionArea" type="Area3D" parent="."]
+[node name="LedgeDetection" type="RayCast3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.904884, 0.0818768, 0)
-shape = SubResource("CapsuleShape3D_jcfj3")
+[node name="JumpDetection" type="RayCast3D" parent="."]
+transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 0, 0, 0)
 
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[node name="WallDetection" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 16
+
+[node name="HeadHurtBox" type="CollisionShape3D" parent="WallDetection"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SeparationRayShape3D_efxwq")
+
+[connection signal="area_entered" from="WallDetection" to="." method="_on_wall_detection_area_entered"]
