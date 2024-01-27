@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwneut6qlhu4b"]
+
+[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="1_jcwg3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikobu"]
+
+[node name="Stage" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(24.1942, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.942754, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_ikobu")
+
+[node name="Audience" type="Sprite3D" parent="."]
+transform = Transform3D(19.0269, 0, 0, 0, 1.00127, 0, 0, 0, 1.00127, 0, -1.59942, 0.918176)
+texture = ExtResource("1_jcwg3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 8)
