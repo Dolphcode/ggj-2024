@@ -3,11 +3,18 @@ extends CharacterBody3D
 const SPEED = 2.0
 const JUMP_VELOCITY = 4.5
 
+@onready var detect_platform = $LedgeDetection
+@onready var detect_Jump = $JumpDetection
+@onready var detect_Wall = $WallDetection
+
 # direction
 var input_dir = Vector3(1,0,0)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var turn = false
+var jump = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +23,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if !detect_platform.is_colliding():
+		turn = true
+	else:
+		turn = false
+	
+	
+	
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -29,7 +42,10 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# Direction
-	input_dir = Vector3(1,0,0)
+	
+	# Handle turning
+	if turn:
+		scale.x = scale.x * -1
 	
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -41,5 +57,6 @@ func _physics_process(delta):
 	
 
 
-func _on_detection_area_body_entered(body):
-	pass
+
+func _on_wall_detection_area_entered(area):
+	print("Wall!")

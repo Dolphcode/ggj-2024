@@ -8,6 +8,7 @@
 [sub_resource type="Environment" id="Environment_sprrj"]
 background_mode = 2
 ambient_light_source = 1
+reflected_light_source = 1
 
 [node name="Game" type="Node3D"]
 
@@ -26,5 +27,3 @@ plat_scale = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
-
-[editable path="StagePlatform"]

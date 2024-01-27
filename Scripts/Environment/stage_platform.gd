@@ -15,7 +15,6 @@ func _ready():
 	generate_platforms()
 	if !Engine.is_editor_hint():
 		toggle_tile(1, 0, 0)
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
