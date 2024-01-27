@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://hddej23e7axi"]
+
+[ext_resource type="Script" path="res://Enemies/Scirpts/parent_enemy.gd" id="1_561t2"]
+[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="2_ga28j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtjpb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_apsq5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jcfj3"]
+radius = 0.40273
+height = 0.805461
+
+[node name="ParentEnemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_561t2")
+
+[node name="CollisionBox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vtjpb")
+
+[node name="Head" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="HeadHurtBox" type="CollisionShape3D" parent="Head"]
+transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.53597, 0)
+shape = SubResource("BoxShape3D_apsq5")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+modulate = Color(0.380392, 0.380392, 0.380392, 1)
+texture = ExtResource("2_ga28j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.904884, 0.0818768, 0)
+shape = SubResource("CapsuleShape3D_jcfj3")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
