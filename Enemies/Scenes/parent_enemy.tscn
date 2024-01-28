@@ -43,7 +43,7 @@ collision_layer = 4
 collision_mask = 16
 
 [node name="HeadHurtBox" type="CollisionShape3D" parent="WallDetection"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.61349, 0, -0.605666)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.61349, 0, 0.00302255)
 shape = SubResource("SphereShape3D_ljpes")
 
 [connection signal="body_entered" from="WallDetection" to="." method="_on_wall_detection_body_entered"]
