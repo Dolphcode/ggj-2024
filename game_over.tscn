@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3y75nh3t7mkl"]
+[gd_scene load_steps=7 format=3 uid="uid://c3h2xtbk6r40c"]
 
-[ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="1_1ydln"]
-[ext_resource type="Script" path="res://start_menu.gd" id="1_lquxl"]
-[ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="2_a71gf"]
-[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_ysjac"]
+[ext_resource type="Script" path="res://start_menu.gd" id="1_4cm8f"]
+[ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_exe3v"]
+[ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_af0gc"]
+[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="4_s6so5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xvh"]
 font_size = 100
@@ -14,21 +14,21 @@ ambient_light_source = 1
 reflected_light_source = 1
 
 [node name="Start_Menu" type="Node3D"]
-script = ExtResource("1_lquxl")
+script = ExtResource("1_4cm8f")
 
 [node name="LeftCurtain" type="Sprite3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.50232, 5.748, 3.709)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
-texture = ExtResource("1_1ydln")
+texture = ExtResource("2_exe3v")
 
 [node name="RightCurtain" type="Sprite3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 6.69792, 5.748, 3.709)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
-texture = ExtResource("2_a71gf")
+texture = ExtResource("3_af0gc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -41,7 +41,7 @@ offset_top = 112.0
 offset_right = 106.0
 offset_bottom = 249.0
 grow_horizontal = 2
-text = "Chuckle's Galore Live!"
+text = "Game Over"
 label_settings = SubResource("LabelSettings_t8xvh")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -78,7 +78,7 @@ text = "Quit"
 [node name="TVHost" type="Sprite2D" parent="CanvasLayer"]
 visible = false
 position = Vector2(922, 154)
-texture = ExtResource("3_ysjac")
+texture = ExtResource("4_s6so5")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
