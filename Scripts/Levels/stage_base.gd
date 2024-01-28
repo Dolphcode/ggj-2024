@@ -56,7 +56,7 @@ func start_stage(stageplatform, player):
 				stageplatform.toggle_tile(0, j, grid_info_arr.size() - 1)
 				
 			if grid_info_arr[i][j] == "p":
-				player.position = Vector3(i, j, 1)
+				player.position = Vector3(j, i, player.position.z)
 
 func end_stage():
 	level_loader._on_stage_end()

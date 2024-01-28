@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://deqphuuxkudb6"]
+
+[ext_resource type="PackedScene" uid="uid://bal0yukqqplad" path="res://Scenes/Objectives/banana.tscn" id="1_8p00k"]
+[ext_resource type="Texture2D" uid="uid://ddeihimiavfty" path="res://Assets/Sprites/Objectives/money.png" id="2_ulglk"]
+
+[node name="StaticBody3D" instance=ExtResource("1_8p00k")]
+
+[node name="Sprite3D" parent="." index="2"]
+texture = ExtResource("2_ulglk")

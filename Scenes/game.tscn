@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=19 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
-[ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="2_pwj11"]
-[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_3osvo"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
 [ext_resource type="Script" path="res://Scenes/HeartContainer.gd" id="6_6tgbd"]
+[ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="6_txnew"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_collect.gd" id="8_y8ohe"]
+[ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="9_gili5"]
+[ext_resource type="Texture2D" uid="uid://blduri7yfdouf" path="res://Assets/Sprites/UI/Heart.png" id="9_y8q1r"]
 [ext_resource type="PackedScene" uid="uid://0uewps4rbocq" path="res://Scenes/Environment/grid_tile.tscn" id="12_6ev3m"]
 [ext_resource type="Texture2D" uid="uid://bhak4bs0vbnjm" path="res://Assets/Sprites/Icons/tv_head.png" id="12_pgrxw"]
 
@@ -113,8 +114,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
 dimensions = Vector2i(4, 3)
 plat_scale = 5
 
-[node name="Player" parent="StagePlatform" instance=ExtResource("2_pwj11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1.56296)
+[node name="Player" parent="StagePlatform" instance=ExtResource("6_txnew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
@@ -122,9 +123,9 @@ environment = SubResource("Environment_sprrj")
 [node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
-level_one = [NodePath("1Banana")]
-level_two = [NodePath("1Banana")]
-level_three = [NodePath("1Banana")]
+level_one = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
+level_two = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
+level_three = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../CanvasLayer/Label")
@@ -143,6 +144,22 @@ grid_info = "res://Assets/Grid Info/Diff 1/bananas.txt"
 event_dialog = "I'm going bananaaaas! Better go get those banananaaaaas!"
 event_icon = "res://Assets/Sprites/Icons/tv_head.png"
 
+[node name="1Banana2" type="Node" parent="LevelLoader"]
+script = ExtResource("8_y8ohe")
+spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
+collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
+grid_info = "res://Assets/Grid Info/Diff 1/groceries.txt"
+event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
+event_icon = "res://Assets/Sprites/Characters/agent47.png"
+
+[node name="1Banana3" type="Node" parent="LevelLoader"]
+script = ExtResource("9_gili5")
+spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/teeth_gomba.tscn"])
+target_idx = Array[int]([2])
+grid_info = "res://Assets/Grid Info/Diff 1/dentures.txt"
+event_dialog = "Oh honey dear! I seem to have lost my dentures. Could you fetch them for me"
+event_icon = "res://Assets/Sprites/Characters/gramma.png"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer"]
@@ -152,18 +169,18 @@ script = ExtResource("6_6tgbd")
 
 [node name="Heart1" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
 position = Vector2(37, 40.5)
-scale = Vector2(0.515625, 0.492188)
-texture = ExtResource("3_3osvo")
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_y8q1r")
 
 [node name="Heart2" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
 position = Vector2(104, 40)
-scale = Vector2(0.515625, 0.492188)
-texture = ExtResource("3_3osvo")
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_y8q1r")
 
 [node name="Heart3" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
 position = Vector2(174, 38)
-scale = Vector2(0.515625, 0.492188)
-texture = ExtResource("3_3osvo")
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_y8q1r")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 1
@@ -247,30 +264,4 @@ libraries = {
 "": SubResource("AnimationLibrary_361nu")
 }
 
-[node name="List_Background_Image" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(87, 414)
-texture = ExtResource("3_3osvo")
-
-[node name="ObjectiveList" type="VBoxContainer" parent="CanvasLayer/List_Background_Image"]
-offset_left = -64.0
-offset_top = -48.0
-offset_right = 65.0
-offset_bottom = 53.0
-
-[node name="ObjectiveTitle" type="LineEdit" parent="CanvasLayer/List_Background_Image/ObjectiveList"]
-layout_mode = 2
-text = "Grandma's List:"
-expand_to_text_length = true
-
-[node name="Objective1" type="LineEdit" parent="CanvasLayer/List_Background_Image/ObjectiveList"]
-layout_mode = 2
-placeholder_text = "Objective 1"
-expand_to_text_length = true
-
-[node name="Objective2" type="LineEdit" parent="CanvasLayer/List_Background_Image/ObjectiveList"]
-layout_mode = 2
-placeholder_text = "Objective 2"
-expand_to_text_length = true
-
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
-[connection signal="hurt" from="StagePlatform/Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]

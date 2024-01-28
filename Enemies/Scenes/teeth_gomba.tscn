@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ubmp3wp0e1b1"]
+[gd_scene load_steps=3 format=3 uid="uid://ubmp3wp0e1b1"]
 
 [ext_resource type="PackedScene" uid="uid://hddej23e7axi" path="res://Enemies/Scenes/parent_enemy.tscn" id="1_f46bt"]
+[ext_resource type="Texture2D" uid="uid://boke86ikoig5b" path="res://Assets/Sprites/Enemies/Dentures.png" id="2_stw0n"]
 
 [node name="TeethGomba" instance=ExtResource("1_f46bt")]
+
+[node name="Sprite3D" parent="." index="2"]
+texture = ExtResource("2_stw0n")

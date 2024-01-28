@@ -25,7 +25,7 @@ func _process(_delta):
 
 func _physics_process(delta):
 	
-	position.z = 0
+	position.z = 2
 	
 	# Add the gravity.
 	if not is_on_floor():
