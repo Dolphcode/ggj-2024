@@ -1,6 +1,8 @@
 class_name StageBase
 extends Node
 
+signal stage_complete
+
 @export_category("Data")
 @export var grid_info: String
 @export var event_name: String = "Base Name"
