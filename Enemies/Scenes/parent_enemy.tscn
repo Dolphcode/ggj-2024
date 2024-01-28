@@ -6,6 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_vtjpb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_apsq5"]
+size = Vector3(1.19128, 3.93555, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ljpes"]
 radius = 0.31217
@@ -22,11 +23,12 @@ script = ExtResource("1_561t2")
 shape = SubResource("BoxShape3D_vtjpb")
 
 [node name="Head" type="Area3D" parent="."]
+transform = Transform3D(1.21, 0, 0, 0, 1, 0, 0, 0, 1, 0.0192832, 0.0934927, -0.036335)
 collision_layer = 8
 collision_mask = 2
 
 [node name="HeadHurtBox" type="CollisionShape3D" parent="Head"]
-transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.645826, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.0175293, 0.592945, 0)
 shape = SubResource("BoxShape3D_apsq5")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -55,6 +57,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.3487
 shape = SubResource("SphereShape3D_ljpes")
 
 [node name="HurtBox" type="Area3D" parent="." groups=["Enemy"]]
+transform = Transform3D(1, 0, 0, 0, 0.855013, 0, 0, 0, 0.673507, 0.0617486, -0.149289, 0)
 collision_layer = 4
 collision_mask = 2
 

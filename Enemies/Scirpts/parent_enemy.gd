@@ -1,13 +1,14 @@
 class_name ParentEnemy
 extends CharacterBody3D
 
-const SPEED = 2.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 3.0
+const JUMP_VELOCITY = 13.0
 
 @onready var detect_platform = $LedgeDetection
 @onready var detect_Jump = $JumpDetection
 @onready var detect_Wall = $WallDetection
 @onready var detect_leap = $LeapDetection
+var rand
 
 # For testing if a player has bopped this guy
 const PlayerClass = preload("res://Scripts/player.gd")
@@ -25,7 +26,7 @@ var jump = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rand = randi_range(0, 9)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,8 +36,10 @@ func _process(delta):
 		# if there is a block to jump to
 		if detect_leap.is_colliding():
 			jump = true
-		else:
+		elif rand <= 4:
 			turn = true
+		else:
+			turn = false
 	else:
 		turn = false
 	
@@ -78,7 +81,7 @@ func _on_wall_detection_body_entered(body):
 
 func _on_head_body_entered(body):
 	print("Whoa")
-	if body is PlayerClass && body.velocity.y < 0:
+	if body is PlayerClass:
 		body.jump_force()
 		emit_signal("on_enemy_death", self)
 		queue_free() # Temporary
