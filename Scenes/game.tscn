@@ -22,7 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12694, 0.603127, 0)
 
 [node name="StagePlatform" parent="." instance=ExtResource("4_hrlmn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
 dimensions = Vector2i(4, 3)
 plat_scale = 5
 
