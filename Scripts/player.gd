@@ -4,20 +4,25 @@ extends CharacterBody3D
 @export var health = 3
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 18.0
+@onready var sprite3d = $Sprite3D
 
 signal hurt
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _process(delta):
+func _process(_delta):
 	if health == 0:
-		print("dead")
+		get_tree().change_scene_to_file("res://game_over.tscn")
 	if !$HurtTimer.is_stopped():
 		hurt.emit(health)
+		sprite3d.modulate = Color(1,0,0,1)
 		$HurtBox/CollisionShape3D.disabled = true
 	else:
 		$HurtBox/CollisionShape3D.disabled = false
+		sprite3d.modulate = Color(1,1,1,1)
+		
+
 
 func _physics_process(delta):
 	
