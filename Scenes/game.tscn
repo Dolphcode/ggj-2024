@@ -133,6 +133,8 @@ dialog_text = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/Label")
 dialog_texture = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/TextureRect")
 
 [node name="Timer" type="Timer" parent="LevelLoader"]
+wait_time = 30.0
+one_shot = true
 
 [node name="TestEnemyStage" type="Node" parent="LevelLoader"]
 script = ExtResource("7_rdpkj")

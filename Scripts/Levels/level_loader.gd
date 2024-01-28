@@ -5,7 +5,7 @@ extends Node
 @export var level_one : Array[StageBase]
 @export var level_two : Array[StageBase]
 @export var level_three: Array[StageBase]
-@export var time: float = 60.0
+@export var time: float = 30.0
 
 @export_category("References")
 @export var timer: Timer
@@ -32,6 +32,8 @@ func _ready():
 func _process(delta):
 	timer_label.text = str(ceil(timer.time_left))
 	
+	if timer.is_stopped():
+		get_tree().change_scene_to_file("res://win.tscn")
 
 func _on_stage_end():
 	get_tree().paused = true
