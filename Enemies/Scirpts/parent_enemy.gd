@@ -1,3 +1,4 @@
+class_name ParentEnemy
 extends CharacterBody3D
 
 const SPEED = 2.0
@@ -6,6 +7,11 @@ const JUMP_VELOCITY = 4.5
 @onready var detect_platform = $LedgeDetection
 @onready var detect_Jump = $JumpDetection
 @onready var detect_Wall = $WallDetection
+
+# For testing if a player has bopped this guy
+const PlayerClass = preload("res://Scripts/player.gd")
+
+signal on_enemy_death(enemy)
 
 # direction
 var input_dir = Vector3(1,0,0)
@@ -58,3 +64,11 @@ func _physics_process(delta):
 func _on_wall_detection_body_entered(body):
 	print("Wall!")
 	scale.x = scale.x * -1
+
+
+func _on_head_body_entered(body):
+	print("Whoa")
+	if body is PlayerClass && body.velocity.y < 0:
+		body.jump_force()
+		emit_signal("on_enemy_death", self)
+		queue_free() # Temporary

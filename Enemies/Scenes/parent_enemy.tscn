@@ -26,7 +26,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="HeadHurtBox" type="CollisionShape3D" parent="Head"]
-transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.53597, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.645826, 0)
 shape = SubResource("BoxShape3D_apsq5")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -57,4 +57,5 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0598145, -0.0268555, 0)
 shape = SubResource("BoxShape3D_wxded")
 
+[connection signal="body_entered" from="Head" to="." method="_on_head_body_entered"]
 [connection signal="body_entered" from="WallDetection" to="." method="_on_wall_detection_body_entered"]
