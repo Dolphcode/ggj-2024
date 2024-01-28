@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://hddej23e7axi"]
+[gd_scene load_steps=7 format=3 uid="uid://hddej23e7axi"]
 
 [ext_resource type="Script" path="res://Enemies/Scirpts/parent_enemy.gd" id="1_561t2"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="2_ga28j"]
@@ -7,8 +7,11 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_apsq5"]
 
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_efxwq"]
-length = 2.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_ljpes"]
+radius = 0.31217
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wxded"]
+size = Vector3(1.15479, 1.05371, 1)
 
 [node name="ParentEnemy" type="CharacterBody3D"]
 collision_layer = 4
@@ -23,7 +26,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="HeadHurtBox" type="CollisionShape3D" parent="Head"]
-transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.53597, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.645826, 0)
 shape = SubResource("BoxShape3D_apsq5")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -39,11 +42,20 @@ transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="WallDetection" type="Area3D" parent="."]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 16
 
 [node name="HeadHurtBox" type="CollisionShape3D" parent="WallDetection"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-shape = SubResource("SeparationRayShape3D_efxwq")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.348729, 0, 0.00302255)
+shape = SubResource("SphereShape3D_ljpes")
 
-[connection signal="area_entered" from="WallDetection" to="." method="_on_wall_detection_area_entered"]
+[node name="HurtBox" type="Area3D" parent="." groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0598145, -0.0268555, 0)
+shape = SubResource("BoxShape3D_wxded")
+
+[connection signal="body_entered" from="Head" to="." method="_on_head_body_entered"]
+[connection signal="body_entered" from="WallDetection" to="." method="_on_wall_detection_body_entered"]
