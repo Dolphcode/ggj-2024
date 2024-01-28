@@ -10,10 +10,10 @@ signal stage_complete
 var grid_info_arr = []
 	
 func _ready():
-	on_start()
+	pass
 	
 # Please call the super method to set up grid_info_arr
-func on_start():
+func start_stage(stageplatform):
 	var file = FileAccess.open(grid_info, FileAccess.READ)
 	var content = file.get_as_text()
 	
@@ -22,13 +22,15 @@ func on_start():
 		var row = []
 		grid_info_arr.append([])
 		for sym in str.split(""):
-			row.append(sym)
+			if (sym.is_valid_int() || sym.is_valid_identifier()):
+				row.append(sym)
 		str_arr.append(row)
 		
-	var stageplatform = get_parent().get_node("StagePlatform")
 	for i in range(0, str_arr.size()):
+		var str = ""
 		for j in range(0, str_arr[0].size()):
 			grid_info_arr[str_arr.size() - i - 1].append(str_arr[i][j])
+			str += str_arr[i][j]
 			if str_arr[i][j] == "1":
 				stageplatform.toggle_tile(1, j, str_arr.size() - i - 1)
 			else:
@@ -38,7 +40,7 @@ func on_start():
 	
 			
 	
-func on_end():
+func end_stage():
 	pass
 	
 
