@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=18 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
 [ext_resource type="Script" path="res://Scenes/HeartContainer.gd" id="6_6tgbd"]
-[ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="7_rdpkj"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_collect.gd" id="8_y8ohe"]
 [ext_resource type="PackedScene" uid="uid://0uewps4rbocq" path="res://Scenes/Environment/grid_tile.tscn" id="12_6ev3m"]
 [ext_resource type="Texture2D" uid="uid://bhak4bs0vbnjm" path="res://Assets/Sprites/Icons/tv_head.png" id="12_pgrxw"]
@@ -103,8 +102,6 @@ libraries = {
 "": SubResource("AnimationLibrary_kya12")
 }
 
-[node name="Player" parent="." instance=ExtResource("2_pwj11")]
-
 [node name="StaticBody3D2" parent="." instance=ExtResource("12_6ev3m")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -19.4855, 4.75245, -17.495)
 
@@ -116,18 +113,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
 dimensions = Vector2i(4, 3)
 plat_scale = 5
 
+[node name="Player" parent="StagePlatform" instance=ExtResource("2_pwj11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1.56296)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "timer", "stage_platform", "timer_label", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
-level_one = [NodePath("TestEnemyStage"), NodePath("TestEnemyStage2")]
+level_one = [NodePath("1Banana")]
+level_two = [NodePath("1Banana")]
+level_three = [NodePath("1Banana")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../CanvasLayer/Label")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
-player = NodePath("../Player")
+player = NodePath("../StagePlatform/Player")
 dialog_anim = NodePath("../CanvasLayer/Dialogue Snippet/Dialog")
 dialog_text = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/Label")
 dialog_texture = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/TextureRect")
@@ -136,21 +138,11 @@ dialog_texture = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/TextureRec
 wait_time = 30.0
 one_shot = true
 
-[node name="TestEnemyStage" type="Node" parent="LevelLoader"]
-script = ExtResource("7_rdpkj")
-spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
-target_idx = Array[int]([0])
-grid_info = "res://Assets/Grid Info/sample2.txt"
-event_name = "Test Enemies"
-event_dialog = "Stop those cans of beans! Stomp on them now!"
-event_icon = "res://Assets/Sprites/Icons/tv_head.png"
-
-[node name="TestEnemyStage2" type="Node" parent="LevelLoader"]
+[node name="1Banana" type="Node" parent="LevelLoader"]
 script = ExtResource("8_y8ohe")
-spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
-collectibles = Array[String](["res://Scenes/Objectives/base_objective.tscn", "res://Scenes/Objectives/base_objective.tscn", "res://Scenes/Objectives/base_objective.tscn"])
-grid_info = "res://Assets/Grid Info/sample3.txt"
-event_dialog = "Stop those cans of beans! Stomp on them now!"
+collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
+grid_info = "res://Assets/Grid Info/Diff 1/bananas.txt"
+event_dialog = "I'm going bananaaaas! Better go get those banananaaaaas!"
 event_icon = "res://Assets/Sprites/Icons/tv_head.png"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -283,4 +275,4 @@ placeholder_text = "Objective 2"
 expand_to_text_length = true
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
-[connection signal="hurt" from="Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]
+[connection signal="hurt" from="StagePlatform/Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]
