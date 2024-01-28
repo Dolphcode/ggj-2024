@@ -7,6 +7,7 @@ extends StageBase
 @export_category("Collection Config")
 @export var collectibles: Array[String]
 
+var enemies: Array[ParentEnemy]
 var interacts: Array[BaseInteractable]
 
 func start_stage(stageplatform):
@@ -18,9 +19,9 @@ func start_stage(stageplatform):
 	for y in range(0, grid_info_arr.size()):
 		for x in range(0, grid_info_arr[0].size()):
 			if grid_info_arr[y][x] == 'x':
-				enemypos.append(Vector2i(x,y))
+				collectiblepos.append(Vector2i(x,y))
 			elif grid_info_arr[y][x] == 'y':
-				collectibles.append(Vector2i(x,y))
+				enemypos.append(Vector2i(x,y))
 				
 	for spawn in spawns:
 		var enemy = load(spawn).instantiate()
@@ -29,6 +30,7 @@ func start_stage(stageplatform):
 		var randpos = enemypos[randidx]
 		enemypos.remove_at(randidx)
 		enemy.position = Vector3(randpos.x, randpos.y, 1)
+		enemies.append(enemy)
 		
 	for collectible in collectibles:
 		var interact = load(collectible).instantiate()
@@ -40,6 +42,14 @@ func start_stage(stageplatform):
 		interacts.append(interact)
 		interact.player_interact.connect(_on_interact)
 		
+func end_stage():
+	var i = 0
+	while enemies.size() > 0:
+		var enemy = enemies[0]
+		enemies.remove_at(0)
+		if typeof(enemy) != TYPE_NIL && is_instance_valid(enemy):
+			enemy.queue_free()
+	super.end_stage()
 
 func _on_interact(interact):
 	for i in range(0, interacts.size()):

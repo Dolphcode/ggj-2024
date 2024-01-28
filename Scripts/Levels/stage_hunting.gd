@@ -35,7 +35,10 @@ func start_stage(stageplatform):
 			
 
 func end_stage():
-	for enemy in enemies:
+	var i = 0
+	while enemies.size() > 0:
+		var enemy = enemies[0]
+		enemies.remove_at(0)
 		if typeof(enemy) != TYPE_NIL && is_instance_valid(enemy):
 			enemy.queue_free()
 	super.end_stage()

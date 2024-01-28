@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/HeartContainer.gd" id="6_6tgbd"]
 [ext_resource type="PackedScene" uid="uid://cw71uxwrs2lbp" path="res://Scenes/Stages/test_stage.tscn" id="6_eh5rh"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="7_rdpkj"]
-[ext_resource type="PackedScene" uid="uid://dk1trfyil1lep" path="res://Scenes/Objectives/base_objective.tscn" id="11_ifhv8"]
+[ext_resource type="Script" path="res://Scripts/Levels/stage_collect.gd" id="8_y8ohe"]
 
 [sub_resource type="Environment" id="Environment_sprrj"]
 background_mode = 2
@@ -39,7 +39,7 @@ environment = SubResource("Environment_sprrj")
 
 [node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "timer", "stage_platform", "timer_label")]
 script = ExtResource("5_kgk5b")
-level_one = [NodePath("TestEnemyStage")]
+level_one = [NodePath("TestEnemyStage2"), NodePath("TestEnemyStage")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../CanvasLayer/Label")
@@ -53,6 +53,12 @@ script = ExtResource("7_rdpkj")
 spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
 target_idx = Array[int]([0])
 grid_info = "res://Assets/Grid Info/sample2.txt"
+
+[node name="TestEnemyStage2" type="Node" parent="LevelLoader"]
+script = ExtResource("8_y8ohe")
+spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
+collectibles = Array[String](["res://Scenes/Objectives/base_objective.tscn", "res://Scenes/Objectives/base_objective.tscn", "res://Scenes/Objectives/base_objective.tscn"])
+grid_info = "res://Assets/Grid Info/sample3.txt"
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("5_0temo")
@@ -95,7 +101,5 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="StaticBody3D" parent="." instance=ExtResource("11_ifhv8")]
 
 [connection signal="hurt" from="Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]

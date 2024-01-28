@@ -8,12 +8,16 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_agl34"]
 
 [node name="StaticBody3D" type="StaticBody3D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_ad166")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_tllxn")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_agl34")

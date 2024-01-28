@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var health = 3
 @export var SPEED = 5.0
-@export var JUMP_VELOCITY = 9.0
+@export var JUMP_VELOCITY = 18.0
 
 signal hurt
 

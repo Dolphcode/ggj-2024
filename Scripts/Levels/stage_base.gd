@@ -43,6 +43,13 @@ func start_stage(stageplatform):
 				else:
 					stageplatform.toggle_tile(0, j, str_arr.size() - i - 1)
 	is_loaded = true
+	
+	for i in range(0, grid_info_arr.size()):
+		for j in range(0, grid_info_arr[0].size()):
+			if grid_info_arr[i][j] == "1":
+				stageplatform.toggle_tile(1, j, grid_info_arr.size() - 1)
+			else:
+				stageplatform.toggle_tile(0, j, grid_info_arr.size() - 1)
 
 func end_stage():
 	level_loader._on_stage_end()
