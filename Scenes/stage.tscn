@@ -21,9 +21,6 @@ shape = SubResource("BoxShape3D_ikobu")
 transform = Transform3D(19.0269, 0, 0, 0, 1.00127, 0, 0, 0, 1.00127, 0, -1.59942, 0.918176)
 texture = ExtResource("1_jcwg3")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.22986, 12.0628)
-
 [node name="Wall" type="StaticBody3D" parent="." groups=["Walls"]]
 transform = Transform3D(1, 0, 0, 0, 7.67547, 0, 0, 0, 1, -11.6459, 2.72153, 0)
 collision_layer = 16
@@ -53,3 +50,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.20584, 12.1685)
 light_energy = 16.0
 spot_range = 23.666
 spot_angle = 51.3874
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(1152, 648)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.66394, 13.064)

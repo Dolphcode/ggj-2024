@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=9 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="2_pwj11"]
+[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_3osvo"]
 [ext_resource type="PackedScene" uid="uid://hddej23e7axi" path="res://Enemies/Scenes/parent_enemy.tscn" id="3_7yumb"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_base.gd" id="5_0temo"]
+[ext_resource type="Script" path="res://Scenes/HeartContainer.gd" id="6_6tgbd"]
 
 [sub_resource type="Environment" id="Environment_sprrj"]
 background_mode = 2
@@ -32,3 +34,25 @@ environment = SubResource("Environment_sprrj")
 [node name="Node" type="Node" parent="."]
 script = ExtResource("5_0temo")
 grid_info = "res://Assets/Grid Info/sample.txt"
+
+[node name="HeartContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_6tgbd")
+
+[node name="Heart1" type="Sprite2D" parent="HeartContainer"]
+position = Vector2(37, 40.5)
+scale = Vector2(0.515625, 0.492188)
+texture = ExtResource("3_3osvo")
+
+[node name="Heart2" type="Sprite2D" parent="HeartContainer"]
+position = Vector2(104, 40)
+scale = Vector2(0.515625, 0.492188)
+texture = ExtResource("3_3osvo")
+
+[node name="Heart3" type="Sprite2D" parent="HeartContainer"]
+position = Vector2(174, 38)
+scale = Vector2(0.515625, 0.492188)
+texture = ExtResource("3_3osvo")
+
+[connection signal="hurt" from="Player" to="HeartContainer" method="_on_player_hurt"]

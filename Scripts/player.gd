@@ -4,8 +4,19 @@ extends CharacterBody3D
 @export var SPEED = 5.0
 @export var JUMP_VELOCITY = 9.0
 
+signal hurt
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+func _process(delta):
+	if health == 0:
+		print("dead")
+	if !$HurtTimer.is_stopped():
+		hurt.emit(health)
+		$HurtBox/CollisionShape3D.disabled = true
+	else:
+		$HurtBox/CollisionShape3D.disabled = false
 
 func _physics_process(delta):
 	
@@ -29,3 +40,9 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func _on_hurt_box_area_entered(area):
+	if area.is_in_group("Enemy"):
+		health -= 1
+		print(health)
+		$HurtTimer.start()
