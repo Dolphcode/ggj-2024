@@ -11,6 +11,7 @@ extends Node
 @export var timer: Timer
 @export var stage_platform: StagePlatform
 @export var timer_label: Label
+@export var curtain_anim: AnimationPlayer
 var stage: StageBase
 
 # Called when the node enters the scene tree for the first time.
@@ -26,14 +27,20 @@ func _process(delta):
 	
 
 func _on_stage_end():
-	stage.stage_complete.disconnect(_on_stage_end)
-	timer.paused = true
-	stage = pick_stage()
-	stage.stage_complete.connect(_on_stage_end)
-	stage.start_stage(stage_platform)
-	timer.paused = false
+	pass
 
 func pick_stage():
 	#var stage_picks = level_one if (timer.time_left < time / 3.0) else (level_two if (timer.time_left < time * 2.0 / 3.0) else level_three)
 	var stage_picks = level_one
 	return stage_picks.pick_random()
+
+
+func _on_curtain_animation_animation_finished(anim_name):
+	if (anim_name == "Close"):
+		stage.stage_complete.disconnect(_on_stage_end)
+		timer.paused = true
+		stage = pick_stage()
+		stage.stage_complete.connect(_on_stage_end)
+		stage.start_stage(stage_platform)
+		timer.paused = false
+		

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwneut6qlhu4b"]
 
-[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="1_jcwg3"]
+[ext_resource type="Texture2D" uid="uid://d13xu7d56j0bq" path="res://Assets/Sprites/Crowd.png" id="1_1m2o6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tki6t"]
 albedo_color = Color(0.388235, 0.27451, 0.121569, 1)
@@ -22,8 +22,8 @@ material = SubResource("StandardMaterial3D_tki6t")
 shape = SubResource("BoxShape3D_ikobu")
 
 [node name="Audience" type="Sprite3D" parent="."]
-transform = Transform3D(19.0269, 0, 0, 0, 1.00127, 0, 0, 0, 1.00127, 0, -1.59942, 0.918176)
-texture = ExtResource("1_jcwg3")
+transform = Transform3D(1, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 2.42549, 6.98939)
+texture = ExtResource("1_1m2o6")
 
 [node name="Wall" type="StaticBody3D" parent="." groups=["Walls"]]
 transform = Transform3D(1, 0, 0, 0, 7.67547, 0, 0, 0, 1, -11.6459, 2.72153, 0)
@@ -65,4 +65,4 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.66394, 13.064)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.66394, 15.064)

@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=18 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
+[ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
 [ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="2_pwj11"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_3osvo"]
 [ext_resource type="PackedScene" uid="uid://hddej23e7axi" path="res://Enemies/Scenes/parent_enemy.tscn" id="3_7yumb"]
+[ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_base.gd" id="5_0temo"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
@@ -11,6 +13,46 @@
 [ext_resource type="PackedScene" uid="uid://cw71uxwrs2lbp" path="res://Scenes/Stages/test_stage.tscn" id="6_eh5rh"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="7_rdpkj"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_collect.gd" id="8_y8ohe"]
+
+[sub_resource type="Animation" id="Animation_odrgf"]
+resource_name = "Open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCurtain")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -6.44633, 5.7484, 3.70924, 1, 1, -10.946, 5.748, 3.709)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCurtain")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 5.76654, 5.7484, 3.70924, 1, 1, 11.567, 5.748, 3.709)
+
+[sub_resource type="Animation" id="Animation_7argu"]
+resource_name = "Close"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCurtain")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -10.946, 5.748, 3.709, 1, 1, -6.44633, 5.7484, 3.70924)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCurtain")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 11.567, 5.748, 3.709, 1, 1, 5.76654, 5.7484, 3.70924)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kya12"]
+_data = {
+"Close": SubResource("Animation_7argu"),
+"Open": SubResource("Animation_odrgf")
+}
 
 [sub_resource type="Environment" id="Environment_sprrj"]
 background_mode = 2
@@ -22,6 +64,25 @@ reflected_light_source = 1
 [node name="Stage" parent="." instance=ExtResource("1_gxsmk")]
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Stage"]
+
+[node name="LeftCurtain" type="Sprite3D" parent="Stage"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -10.946, 5.748, 3.709)
+modulate = Color(0.517647, 0.517647, 0.517647, 1)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("2_khx6x")
+
+[node name="RightCurtain" type="Sprite3D" parent="Stage"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 11.567, 5.748, 3.709)
+modulate = Color(0.517647, 0.517647, 0.517647, 1)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("3_j5kwj")
+
+[node name="CurtainAnimation" type="AnimationPlayer" parent="Stage"]
+libraries = {
+"": SubResource("AnimationLibrary_kya12")
+}
 
 [node name="Player" parent="." instance=ExtResource("2_pwj11")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -102,4 +163,5 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]
