@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3nl1r"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="2_276co"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_12d01"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xfrij"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 29
+collision_mask = 17
 script = ExtResource("1_3nl1r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_12d01")
+shape = SubResource("BoxShape3D_xfrij")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 texture = ExtResource("2_276co")
