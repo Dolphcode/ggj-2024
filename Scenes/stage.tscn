@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwneut6qlhu4b"]
+[gd_scene load_steps=5 format=3 uid="uid://bwneut6qlhu4b"]
 
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="1_jcwg3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tki6t"]
+albedo_color = Color(0.388235, 0.27451, 0.121569, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikobu"]
 
@@ -10,7 +13,8 @@
 transform = Transform3D(1.51526, 0, 0, 0, 1.083, 0, 0, 0, 1.083, 0, 0, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(24.1942, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.942754, 0)
+transform = Transform3D(24.194, 0, 0, 0, 1, 0, 0, 0, 6, 0, -0.942754, 0.923361)
+material = SubResource("StandardMaterial3D_tki6t")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBox3D"]
 
