@@ -55,6 +55,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-
-func _on_wall_detection_area_entered(area):
+func _on_wall_detection_body_entered(body):
+	print("Wall!")
 	scale.x = scale.x * -1
