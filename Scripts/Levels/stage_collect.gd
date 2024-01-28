@@ -10,9 +10,9 @@ extends StageBase
 var enemies: Array[ParentEnemy]
 var interacts: Array[BaseInteractable]
 
-func start_stage(stageplatform):
+func start_stage(stageplatform, player):
 	# Call superclass to set up grid reference
-	super.start_stage(stageplatform)
+	super.start_stage(stageplatform, player)
 	
 	var enemypos: Array[Vector2i] = []
 	var collectiblepos: Array[Vector2i] = []

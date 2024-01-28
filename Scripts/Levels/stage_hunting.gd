@@ -9,9 +9,9 @@ var enemies: Array[ParentEnemy]
 var targets: Array[ParentEnemy]
 
 
-func start_stage(stageplatform):
+func start_stage(stageplatform, player):
 	# Call superclass to set up grid reference
-	super.start_stage(stageplatform)
+	super.start_stage(stageplatform, player)
 	
 	var positions: Array[Vector2i] = []
 	for y in range(0, grid_info_arr.size()):

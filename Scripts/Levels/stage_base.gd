@@ -15,11 +15,15 @@ var level_loader
 
 var is_loaded = false
 
+var icon : Texture
+
 func _ready():
+	var image = load(event_icon).get_image()
+	icon = ImageTexture.create_from_image(image)
 	level_loader = get_parent()
 
 # Please call the super method to set up grid_info_arr
-func start_stage(stageplatform):
+func start_stage(stageplatform, player):
 	if (!is_loaded):
 		var file = FileAccess.open(grid_info, FileAccess.READ)
 		var content = file.get_as_text()
@@ -50,6 +54,9 @@ func start_stage(stageplatform):
 				stageplatform.toggle_tile(1, j, grid_info_arr.size() - 1)
 			else:
 				stageplatform.toggle_tile(0, j, grid_info_arr.size() - 1)
+				
+			if grid_info_arr[i][j] == "p":
+				player.position = Vector3(i, j, 1)
 
 func end_stage():
 	level_loader._on_stage_end()

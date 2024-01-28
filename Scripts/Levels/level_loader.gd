@@ -12,6 +12,12 @@ extends Node
 @export var stage_platform: StagePlatform
 @export var timer_label: Label
 @export var curtain_anim: AnimationPlayer
+@export var player: Player
+
+@export_category("Dialog")
+@export var dialog_anim: AnimationPlayer
+@export var dialog_text: Label
+@export var dialog_texture: TextureRect
 var stage: StageBase
 
 # Called when the node enters the scene tree for the first time.
@@ -19,8 +25,9 @@ func _ready():
 	timer.wait_time = time
 	stage = pick_stage()
 	stage.stage_complete.connect(_on_stage_end)
-	stage.start_stage(stage_platform)
+	stage.start_stage(stage_platform, player)
 	timer.start()
+	show_dialog()
 	
 func _process(delta):
 	timer_label.text = str(ceil(timer.time_left))
@@ -42,8 +49,13 @@ func _on_curtain_animation_animation_finished(anim_name):
 		timer.paused = true
 		stage = pick_stage()
 		stage.stage_complete.connect(_on_stage_end)
-		stage.start_stage(stage_platform)
+		stage.start_stage(stage_platform, player)
 		timer.paused = false
 		get_tree().paused = false
 		curtain_anim.play("Open")
-		
+		show_dialog()
+
+func show_dialog():
+	dialog_text.text = stage.event_dialog
+	dialog_texture.texture = stage.icon
+	dialog_anim.play("ShowDialog")
