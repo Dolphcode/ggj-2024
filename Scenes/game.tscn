@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=19 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -57,6 +57,14 @@ _data = {
 background_mode = 2
 ambient_light_source = 1
 reflected_light_source = 1
+
+[sub_resource type="Animation" id="Animation_n1enj"]
+resource_name = "ShowDialog"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_361nu"]
+_data = {
+"ShowDialog": SubResource("Animation_n1enj")
+}
 
 [node name="Game" type="Node3D"]
 
@@ -169,23 +177,34 @@ offset_top = -129.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Dialogue Snippet"]
+[node name="Dialog Box" type="Control" parent="CanvasLayer/Dialogue Snippet"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -528.0
+offset_top = -174.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Dialogue Snippet/Dialog Box"]
 layout_mode = 0
-offset_left = -91.0
-offset_top = -43.0
-offset_right = 437.0
-offset_bottom = 129.0
+offset_top = 2.0
+offset_right = 528.0
+offset_bottom = 174.0
 color = Color(1, 0, 0.345098, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Dialogue Snippet"]
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Dialogue Snippet/Dialog Box"]
 layout_mode = 0
-offset_left = -84.0
-offset_top = -36.0
-offset_right = 429.0
-offset_bottom = 121.0
+offset_left = 7.0
+offset_top = 9.0
+offset_right = 520.0
+offset_bottom = 166.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Dialogue Snippet"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Dialogue Snippet/Dialog Box"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -200,13 +219,18 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("3_3osvo")
 
-[node name="Label" type="Label" parent="CanvasLayer/Dialogue Snippet"]
+[node name="Label" type="Label" parent="CanvasLayer/Dialogue Snippet/Dialog Box"]
 layout_mode = 0
-offset_left = -68.0
-offset_top = -23.0
-offset_right = 269.0
-offset_bottom = 106.0
+offset_left = 23.0
+offset_top = 22.0
+offset_right = 360.0
+offset_bottom = 151.0
 autowrap_mode = 1
+
+[node name="Dialog" type="AnimationPlayer" parent="CanvasLayer/Dialogue Snippet"]
+libraries = {
+"": SubResource("AnimationLibrary_361nu")
+}
 
 [node name="List_Background_Image" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(87, 414)
