@@ -18,7 +18,7 @@ reflected_light_source = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ParentEnemy" parent="." instance=ExtResource("3_7yumb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9043, 0.575391, 0)
 
 [node name="StagePlatform" parent="." instance=ExtResource("4_hrlmn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -2)

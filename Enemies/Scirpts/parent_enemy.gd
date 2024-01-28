@@ -59,4 +59,4 @@ func _physics_process(delta):
 
 
 func _on_wall_detection_area_entered(area):
-	print("Wall!")
+	scale.x = scale.x * -1
