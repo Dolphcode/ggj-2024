@@ -16,7 +16,6 @@ func _process(_delta):
 		get_tree().change_scene_to_file("res://game_over.tscn")
 	if !$HurtTimer.is_stopped():
 		hurt.emit(health)
-		sprite3d.modulate = Color(1,0,0,1)
 		$HurtBox/CollisionShape3D.disabled = true
 	else:
 		$HurtBox/CollisionShape3D.disabled = false
@@ -50,6 +49,7 @@ func _physics_process(delta):
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("Enemy"):
 		health -= 1
+		sprite3d.modulate = Color(1,0,0,1)
 		print(health)
 		$HurtTimer.start()
 		
