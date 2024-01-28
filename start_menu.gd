@@ -14,12 +14,10 @@ func _process(delta):
 	pass
 
 func _on_start_button_pressed():
-	pass # Replace with function body.
-
+	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
 func _on_setting_button_pressed():
 	pass # Replace with function body.
 
-
 func _on_end_button_pressed():
-	pass # Replace with function body.
+	get_tree().quit()
