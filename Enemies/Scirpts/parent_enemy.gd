@@ -1,8 +1,8 @@
 class_name ParentEnemy
 extends CharacterBody3D
 
-const SPEED = 3.0
-const JUMP_VELOCITY = 13.0
+@export var SPEED = 3.0
+@export var JUMP_VELOCITY = 13.0
 
 @onready var detect_platform = $LedgeDetection
 @onready var detect_Jump = $JumpDetection

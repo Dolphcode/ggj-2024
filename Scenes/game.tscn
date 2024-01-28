@@ -14,23 +14,6 @@
 [ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="7_rdpkj"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_collect.gd" id="8_y8ohe"]
 
-[sub_resource type="Animation" id="Animation_odrgf"]
-resource_name = "Open"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LeftCurtain")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -6.44633, 5.7484, 3.70924, 1, 1, -10.946, 5.748, 3.709)
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RightCurtain")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 5.76654, 5.7484, 3.70924, 1, 1, 11.567, 5.748, 3.709)
-
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
 tracks/0/type = "position_3d"
@@ -47,6 +30,23 @@ tracks/1/path = NodePath("RightCurtain")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 11.567, 5.748, 3.709, 1, 1, 5.76654, 5.7484, 3.70924)
+
+[sub_resource type="Animation" id="Animation_odrgf"]
+resource_name = "Open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCurtain")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -6.44633, 5.7484, 3.70924, 1, 1, -10.946, 5.748, 3.709)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCurtain")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 5.76654, 5.7484, 3.70924, 1, 1, 11.567, 5.748, 3.709)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kya12"]
 _data = {
@@ -162,6 +162,31 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="List_Background_Image" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(87, 414)
+texture = ExtResource("3_3osvo")
+
+[node name="ObjectiveList" type="VBoxContainer" parent="CanvasLayer/List_Background_Image"]
+offset_left = -64.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = 53.0
+
+[node name="ObjectiveTitle" type="LineEdit" parent="CanvasLayer/List_Background_Image/ObjectiveList"]
+layout_mode = 2
+text = "Grandma's List:"
+expand_to_text_length = true
+
+[node name="Objective1" type="LineEdit" parent="CanvasLayer/List_Background_Image/ObjectiveList"]
+layout_mode = 2
+placeholder_text = "Objective 1"
+expand_to_text_length = true
+
+[node name="Objective2" type="LineEdit" parent="CanvasLayer/List_Background_Image/ObjectiveList"]
+layout_mode = 2
+placeholder_text = "Objective 2"
+expand_to_text_length = true
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]
