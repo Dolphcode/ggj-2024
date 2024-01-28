@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=17 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -10,26 +10,8 @@
 [ext_resource type="Script" path="res://Scripts/Levels/stage_base.gd" id="5_0temo"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
 [ext_resource type="Script" path="res://Scenes/HeartContainer.gd" id="6_6tgbd"]
-[ext_resource type="PackedScene" uid="uid://cw71uxwrs2lbp" path="res://Scenes/Stages/test_stage.tscn" id="6_eh5rh"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="7_rdpkj"]
 [ext_resource type="Script" path="res://Scripts/Levels/stage_collect.gd" id="8_y8ohe"]
-
-[sub_resource type="Animation" id="Animation_odrgf"]
-resource_name = "Open"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LeftCurtain")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -6.44633, 5.7484, 3.70924, 1, 1, -10.946, 5.748, 3.709)
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RightCurtain")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 5.76654, 5.7484, 3.70924, 1, 1, 11.567, 5.748, 3.709)
 
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
@@ -48,6 +30,23 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 11.567, 5.748, 3.709, 1, 1, 5.76654, 5.7484, 3.70924)
 
+[sub_resource type="Animation" id="Animation_odrgf"]
+resource_name = "Open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCurtain")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -6.44633, 5.7484, 3.70924, 1, 1, -10.946, 5.748, 3.709)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCurtain")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 5.76654, 5.7484, 3.70924, 1, 1, 11.567, 5.748, 3.709)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kya12"]
 _data = {
 "Close": SubResource("Animation_7argu"),
@@ -62,6 +61,7 @@ reflected_light_source = 1
 [node name="Game" type="Node3D"]
 
 [node name="Stage" parent="." instance=ExtResource("1_gxsmk")]
+process_mode = 3
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Stage"]
 
@@ -98,14 +98,14 @@ plat_scale = 5
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "timer", "stage_platform", "timer_label")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "timer", "stage_platform", "timer_label", "curtain_anim")]
+process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("TestEnemyStage2"), NodePath("TestEnemyStage")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../CanvasLayer/Label")
-
-[node name="TestStage" parent="LevelLoader" instance=ExtResource("6_eh5rh")]
+curtain_anim = NodePath("../Stage/CurtainAnimation")
 
 [node name="Timer" type="Timer" parent="LevelLoader"]
 
@@ -157,11 +157,56 @@ grow_horizontal = 0
 text = "TIMER"
 horizontal_alignment = 2
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Dialogue Snippet" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -437.0
+offset_top = -129.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Dialogue Snippet"]
+layout_mode = 0
+offset_left = -91.0
+offset_top = -43.0
+offset_right = 437.0
+offset_bottom = 129.0
+color = Color(1, 0, 0.345098, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Dialogue Snippet"]
+layout_mode = 0
+offset_left = -84.0
+offset_top = -36.0
+offset_right = 429.0
+offset_bottom = 121.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Dialogue Snippet"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -151.0
+offset_top = -151.0
+offset_right = -23.0
+offset_bottom = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_3osvo")
+
+[node name="Label" type="Label" parent="CanvasLayer/Dialogue Snippet"]
+layout_mode = 0
+offset_left = -68.0
+offset_top = -23.0
+offset_right = 269.0
+offset_bottom = 106.0
+autowrap_mode = 1
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]

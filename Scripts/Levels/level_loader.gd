@@ -27,7 +27,8 @@ func _process(delta):
 	
 
 func _on_stage_end():
-	pass
+	get_tree().paused = true
+	curtain_anim.play("Close")
 
 func pick_stage():
 	#var stage_picks = level_one if (timer.time_left < time / 3.0) else (level_two if (timer.time_left < time * 2.0 / 3.0) else level_three)
@@ -43,4 +44,6 @@ func _on_curtain_animation_animation_finished(anim_name):
 		stage.stage_complete.connect(_on_stage_end)
 		stage.start_stage(stage_platform)
 		timer.paused = false
+		get_tree().paused = false
+		curtain_anim.play("Open")
 		

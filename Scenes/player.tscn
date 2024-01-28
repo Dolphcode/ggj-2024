@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://la3al4wownf8"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3nl1r"]
-[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="2_276co"]
+[ext_resource type="Texture2D" uid="uid://bfkmtiguov1pm" path="res://Assets/Sprites/Characters/player.png" id="2_acmou"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xfrij"]
 
@@ -17,7 +17,8 @@ script = ExtResource("1_3nl1r")
 shape = SubResource("BoxShape3D_xfrij")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-texture = ExtResource("2_276co")
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+texture = ExtResource("2_acmou")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
