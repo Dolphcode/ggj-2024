@@ -31,6 +31,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (LevelTransitionChecker.transitioning): # Customized pause mode type thing, hopefully this isn't too jank
+		return
+	
 	# detect if enemy is on the edge
 	if !detect_platform.is_colliding() and is_on_floor():
 		# if there is a block to jump to
@@ -47,6 +50,9 @@ func _process(delta):
 	
 
 func _physics_process(delta):
+	if (LevelTransitionChecker.transitioning): # Customized pause mode type thing, hopefully this isn't too jank
+		return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -72,7 +78,6 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_wall_detection_body_entered(body):
-	print("Wall!")
 	if detect_Jump.is_colliding():
 		scale.x = scale.x * -1
 	else:
@@ -80,7 +85,6 @@ func _on_wall_detection_body_entered(body):
 
 
 func _on_head_body_entered(body):
-	print("Whoa")
 	if body is PlayerClass && body.velocity.y < 0:
 		body.jump_force()
 		emit_signal("on_enemy_death", self)

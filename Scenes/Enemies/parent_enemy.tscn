@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://hddej23e7axi"]
 
-[ext_resource type="Script" path="res://Enemies/Scirpts/parent_enemy.gd" id="1_561t2"]
+[ext_resource type="Script" path="res://Scripts/Enemies/parent_enemy.gd" id="1_561t2"]
 [ext_resource type="Texture2D" uid="uid://ddf2w4vewiib4" path="res://Assets/Sprites/Enemies/TV.png" id="2_7edp0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vtjpb"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=24 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
-[ext_resource type="Script" path="res://Scenes/heart_container.gd" id="6_6tgbd"]
+[ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="6_6tgbd"]
 [ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="6_txnew"]
 [ext_resource type="Script" path="res://Scripts/Levels/ObjectiveTypes/stage_collect.gd" id="8_y8ohe"]
 [ext_resource type="Script" path="res://Scripts/Levels/ObjectiveTypes/stage_hunting.gd" id="9_gili5"]
@@ -89,10 +89,12 @@ _data = {
 "ShowDialog": SubResource("Animation_n1enj")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_84ogf"]
+font = ExtResource("13_vvoco")
+
 [node name="Game" type="Node3D"]
 
 [node name="Stage" parent="." instance=ExtResource("1_gxsmk")]
-process_mode = 3
 
 [node name="LeftCurtain" type="Sprite3D" parent="Stage"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -10.946, 5.748, 3.709)
@@ -130,22 +132,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
-level_one = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
+level_one = [NodePath("TVHost_Objective")]
 level_two = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
 level_three = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
-timer_label = NodePath("../CanvasLayer/TimerLabel")
-progress_bar = NodePath("../CanvasLayer/TextureProgressBar")
+timer_label = NodePath("../UI/TimerLabel")
+progress_bar = NodePath("../UI/TextureProgressBar")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
 player = NodePath("../StagePlatform/Player")
-dialog_anim = NodePath("../CanvasLayer/DialogueSnippet/Dialog")
-dialog_text = NodePath("../CanvasLayer/DialogueSnippet/DialogBox/MiniDialogue")
-dialog_name = NodePath("../CanvasLayer/DialogueSnippet/DialogBox/SpeakerName")
-dialog_texture = NodePath("../CanvasLayer/DialogueSnippet/DialogBox/CharacterIcon")
+dialog_anim = NodePath("../UI/DialogueSnippet/Dialog")
+dialog_text = NodePath("../UI/DialogueSnippet/DialogBox/MiniDialogue")
+dialog_name = NodePath("../UI/DialogueSnippet/DialogBox/SpeakerName")
+objective_list = NodePath("../UI/ObjectiveList/ObjectivesLabel")
+dialog_texture = NodePath("../UI/DialogueSnippet/DialogBox/CharacterIcon")
 
 [node name="Timer" type="Timer" parent="LevelLoader"]
 wait_time = 30.0
@@ -155,11 +158,13 @@ one_shot = true
 script = ExtResource("8_y8ohe")
 collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
 grid_info = "res://Assets/Grid Info/Diff 1/bananas.txt"
+event_objectives_text = "Collect all bananas
+Don't get lost"
 event_dialog = "I'm going bananaaaas! Better go get those banananaaaaas!"
 
 [node name="Agent_Objective" type="Node" parent="LevelLoader"]
 script = ExtResource("8_y8ohe")
-spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
+spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn"])
 collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
 grid_info = "res://Assets/Grid Info/Diff 1/groceries.txt"
 event_icon = "res://Assets/Sprites/Icons/agent47.png"
@@ -167,35 +172,35 @@ event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
 
 [node name="Grandma_Objective" type="Node" parent="LevelLoader"]
 script = ExtResource("9_gili5")
-spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/teeth_gomba.tscn"])
+spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/teeth_gomba.tscn"])
 target_idx = Array[int]([2])
 grid_info = "res://Assets/Grid Info/Diff 1/dentures.txt"
 event_icon = "res://Assets/Sprites/Icons/gramma.png"
 event_dialog = "Oh honey dear! I seem to have lost my dentures. Could you fetch them for me"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HeartContainer" type="HBoxContainer" parent="UI"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_6tgbd")
 
-[node name="Heart1" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
+[node name="Heart1" type="Sprite2D" parent="UI/HeartContainer"]
 position = Vector2(37, 40.5)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("9_y8q1r")
 
-[node name="Heart2" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
+[node name="Heart2" type="Sprite2D" parent="UI/HeartContainer"]
 position = Vector2(104, 40)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("9_y8q1r")
 
-[node name="Heart3" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
+[node name="Heart3" type="Sprite2D" parent="UI/HeartContainer"]
 position = Vector2(174, 38)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("9_y8q1r")
 
-[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+[node name="TimerLabel" type="Label" parent="UI"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -208,7 +213,7 @@ text = "TIMER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DialogueSnippet" type="Control" parent="CanvasLayer"]
+[node name="DialogueSnippet" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -220,7 +225,7 @@ offset_top = -129.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="DialogBox" type="Control" parent="CanvasLayer/DialogueSnippet"]
+[node name="DialogBox" type="Control" parent="UI/DialogueSnippet"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -236,14 +241,14 @@ scale = Vector2(0.800005, 0.800002)
 pivot_offset = Vector2(527, 173)
 metadata/_edit_use_anchors_ = true
 
-[node name="TextboxBorder" type="ColorRect" parent="CanvasLayer/DialogueSnippet/DialogBox"]
+[node name="TextboxBorder" type="ColorRect" parent="UI/DialogueSnippet/DialogBox"]
 layout_mode = 0
 offset_top = 2.0
 offset_right = 528.0
 offset_bottom = 174.0
 color = Color(1, 0, 0.345098, 1)
 
-[node name="TextboxFill" type="ColorRect" parent="CanvasLayer/DialogueSnippet/DialogBox"]
+[node name="TextboxFill" type="ColorRect" parent="UI/DialogueSnippet/DialogBox"]
 layout_mode = 0
 offset_left = 7.0
 offset_top = 9.0
@@ -251,7 +256,7 @@ offset_right = 520.0
 offset_bottom = 166.0
 color = Color(0, 0, 0, 1)
 
-[node name="CharacterIcon" type="TextureRect" parent="CanvasLayer/DialogueSnippet/DialogBox"]
+[node name="CharacterIcon" type="TextureRect" parent="UI/DialogueSnippet/DialogBox"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -267,7 +272,7 @@ grow_vertical = 0
 texture = ExtResource("12_pgrxw")
 expand_mode = 1
 
-[node name="MiniDialogue" type="Label" parent="CanvasLayer/DialogueSnippet/DialogBox"]
+[node name="MiniDialogue" type="Label" parent="UI/DialogueSnippet/DialogBox"]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 58.0
@@ -277,7 +282,7 @@ text = "Testing Dialogue here"
 label_settings = SubResource("LabelSettings_erv0h")
 autowrap_mode = 3
 
-[node name="SpeakerName" type="Label" parent="CanvasLayer/DialogueSnippet/DialogBox"]
+[node name="SpeakerName" type="Label" parent="UI/DialogueSnippet/DialogBox"]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 21.0
@@ -288,12 +293,12 @@ label_settings = SubResource("LabelSettings_bjde4")
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Dialog" type="AnimationPlayer" parent="CanvasLayer/DialogueSnippet"]
+[node name="Dialog" type="AnimationPlayer" parent="UI/DialogueSnippet"]
 libraries = {
 "": SubResource("AnimationLibrary_361nu")
 }
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -309,5 +314,29 @@ texture_under = ExtResource("14_jbp25")
 texture_progress = ExtResource("14_jbp25")
 tint_progress = Color(0.301961, 1, 0.25098, 1)
 
+[node name="ObjectiveList" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -193.0
+offset_right = 148.0
+grow_vertical = 0
+
+[node name="ObjectiveListTitle" type="Label" parent="UI/ObjectiveList"]
+layout_mode = 0
+offset_right = 151.0
+offset_bottom = 36.0
+text = "Stage Directions"
+label_settings = SubResource("LabelSettings_84ogf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ObjectivesLabel" type="Label" parent="UI/ObjectiveList"]
+layout_mode = 0
+offset_top = 41.0
+offset_right = 151.0
+offset_bottom = 193.0
+
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
-[connection signal="hurt" from="StagePlatform/Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]
+[connection signal="hurt" from="StagePlatform/Player" to="UI/HeartContainer" method="_on_player_hurt"]

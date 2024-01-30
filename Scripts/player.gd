@@ -12,6 +12,9 @@ signal hurt
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _process(_delta):
+	if (LevelTransitionChecker.transitioning):
+		return
+	
 	if health == 0:
 		get_tree().change_scene_to_file("res://game_over.tscn")
 	if !$HurtTimer.is_stopped():
@@ -24,6 +27,8 @@ func _process(_delta):
 
 
 func _physics_process(delta):
+	if (LevelTransitionChecker.transitioning):
+		return
 	
 	position.z = 2
 	

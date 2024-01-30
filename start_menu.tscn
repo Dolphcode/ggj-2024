@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3y75nh3t7mkl"]
 
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="1_1ydln"]
-[ext_resource type="Script" path="res://start_menu.gd" id="1_lquxl"]
+[ext_resource type="Script" path="res://Scripts/UI/start_menu.gd" id="1_lquxl"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="2_a71gf"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_ysjac"]
 [ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="5_3stn4"]

@@ -15,6 +15,10 @@ run/main_scene="res://start_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+LevelTransitionChecker="*res://Scripts/Editor/level_transition_mode.gd"
+
 [display]
 
 window/stretch/mode="viewport"

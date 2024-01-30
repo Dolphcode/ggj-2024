@@ -20,7 +20,6 @@ func _process(delta):
 	pass
 
 func toggle_tile(state, x, y):
-	print(tiles[y][x])
 	tiles[y][x].position.z = state if (state == 0 || state == 1) else 0
 
 func generate_platforms():
