@@ -133,9 +133,9 @@ environment = SubResource("Environment_sprrj")
 [node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
-level_one = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
-level_two = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
-level_three = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
+level_one = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
+level_two = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
+level_three = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../CanvasLayer/TimerLabel")
@@ -151,13 +151,13 @@ dialog_texture = NodePath("../CanvasLayer/DialogueSnippet/DialogBox/CharacterIco
 wait_time = 30.0
 one_shot = true
 
-[node name="1Banana" type="Node" parent="LevelLoader"]
+[node name="TVHost_Objective" type="Node" parent="LevelLoader"]
 script = ExtResource("8_y8ohe")
 collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
 grid_info = "res://Assets/Grid Info/Diff 1/bananas.txt"
 event_dialog = "I'm going bananaaaas! Better go get those banananaaaaas!"
 
-[node name="1Banana2" type="Node" parent="LevelLoader"]
+[node name="Agent_Objective" type="Node" parent="LevelLoader"]
 script = ExtResource("8_y8ohe")
 spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
 collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
@@ -165,7 +165,7 @@ grid_info = "res://Assets/Grid Info/Diff 1/groceries.txt"
 event_icon = "res://Assets/Sprites/Icons/agent47.png"
 event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
 
-[node name="1Banana3" type="Node" parent="LevelLoader"]
+[node name="Grandma_Objective" type="Node" parent="LevelLoader"]
 script = ExtResource("9_gili5")
 spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/teeth_gomba.tscn"])
 target_idx = Array[int]([2])
