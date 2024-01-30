@@ -4,4 +4,3 @@
 
 [node name="TestStage" type="Node"]
 script = ExtResource("1_tkb2i")
-grid_info = "res://Assets/Grid Info/sample.txt"

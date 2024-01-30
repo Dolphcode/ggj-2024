@@ -47,8 +47,8 @@ func _on_stage_end():
 	curtain_anim.play("Close")
 
 func pick_stage():
-	#var stage_picks = level_one if (timer.time_left < time / 3.0) else (level_two if (timer.time_left < time * 2.0 / 3.0) else level_three)
-	var stage_picks = level_one
+	var stage_picks = level_one if (timer.time_left < time / 3.0) else (level_two if (timer.time_left < time * 2.0 / 3.0) else level_three)
+	#var stage_picks = level_one
 	return stage_picks.pick_random()
 
 
