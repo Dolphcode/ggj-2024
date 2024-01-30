@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://la3al4wownf8"]
+[gd_scene load_steps=8 format=3 uid="uid://la3al4wownf8"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_3nl1r"]
 [ext_resource type="Texture2D" uid="uid://bfkmtiguov1pm" path="res://Assets/Sprites/Characters/player.png" id="2_acmou"]
+[ext_resource type="AudioStream" uid="uid://bdefxemaakiil" path="res://Sounds/SoundEffects/oof-sound-effect-147492.mp3" id="3_ao417"]
 [ext_resource type="AudioStream" uid="uid://c2lgr2wri37ig" path="res://Sounds/SoundEffects/laughs-6112.mp3" id="3_jdrx5"]
+[ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="5_qetyh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xfrij"]
 
@@ -40,7 +42,17 @@ shape = SubResource("BoxShape3D_0wtxk")
 wait_time = 4.0
 one_shot = true
 
+[node name="Walking" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qetyh")
+volume_db = 24.0
+
 [node name="PlayerHurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ao417")
+
+[node name="LaughTrack" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_jdrx5")
+
+[node name="LaughTrackTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

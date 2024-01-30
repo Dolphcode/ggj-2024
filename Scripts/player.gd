@@ -23,7 +23,9 @@ func _process(_delta):
 	else:
 		$HurtBox/CollisionShape3D.disabled = false
 		sprite3d.modulate = Color(1,1,1,1)
-		
+	
+	if $LaughTrackTimer.is_stopped():
+		$LaughTrack.play()
 
 
 func _physics_process(delta):
@@ -46,8 +48,10 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
+		$Walking.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		$Walking.stop()
 	sprite3d.flip_h = false if velocity.x < 0 else (true if velocity.x > 0 else sprite3d.flip_h)
 
 	move_and_slide()
@@ -59,6 +63,7 @@ func _on_hurt_box_area_entered(area):
 		sprite3d.modulate = Color(1,0,0,1)
 		print(health)
 		$HurtTimer.start()
+		$LaughTrackTimer.start()
 		
 func jump_force():
 	velocity.y = JUMP_VELOCITY
