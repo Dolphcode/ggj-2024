@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 @export var health = 3
-@export var SPEED = 5.0
+@export var SPEED = 7.0
 @export var JUMP_VELOCITY = 18.0
 @onready var sprite3d = $Sprite3D
 
