@@ -17,6 +17,7 @@ extends Node
 @export_category("Dialog")
 @export var dialog_anim: AnimationPlayer
 @export var dialog_text: Label
+@export var dialog_name: Label
 @export var dialog_texture: TextureRect
 var stage: StageBase
 
@@ -59,5 +60,6 @@ func _on_curtain_animation_animation_finished(anim_name):
 
 func show_dialog():
 	dialog_text.text = stage.event_dialog
+	dialog_name.text = stage.event_character
 	dialog_texture.texture = stage.icon
 	dialog_anim.play("ShowDialog")

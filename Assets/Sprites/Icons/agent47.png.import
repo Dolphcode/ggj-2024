@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0vqu51kci2bi"
-path="res://.godot/imported/shroomsoy.png-b2f716ad016bda1a43708d80e8784ba7.ctex"
+uid="uid://c5uqaanhd0iqf"
+path="res://.godot/imported/agent47.png-dbd98ca44ef552960dc44d5bcdce3dbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/shroomsoy.png"
-dest_files=["res://.godot/imported/shroomsoy.png-b2f716ad016bda1a43708d80e8784ba7.ctex"]
+source_file="res://Assets/Sprites/Icons/agent47.png"
+dest_files=["res://.godot/imported/agent47.png-dbd98ca44ef552960dc44d5bcdce3dbe.ctex"]
 
 [params]
 

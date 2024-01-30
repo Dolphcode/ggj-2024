@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5uqaanhd0iqf"
-path="res://.godot/imported/agent47.png-c3b118519ddc13d6cdad832ea7d712f8.ctex"
+uid="uid://bkrshde3dwvq"
+path="res://.godot/imported/gramma.png-b739e0de8a996f95a61c0e566b354635.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/agent47.png"
-dest_files=["res://.godot/imported/agent47.png-c3b118519ddc13d6cdad832ea7d712f8.ctex"]
+source_file="res://Assets/Sprites/Icons/gramma.png"
+dest_files=["res://.godot/imported/gramma.png-b739e0de8a996f95a61c0e566b354635.ctex"]
 
 [params]
 
