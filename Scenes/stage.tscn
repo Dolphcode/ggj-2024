@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d13xu7d56j0bq" path="res://Assets/Sprites/Crowd.png" id="1_1m2o6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tki6t"]
-albedo_color = Color(0.388235, 0.27451, 0.121569, 1)
+albedo_color = Color(0.176471, 0.117647, 0.0352941, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikobu"]
 
