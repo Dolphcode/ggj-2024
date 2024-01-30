@@ -11,6 +11,7 @@ extends Node
 @export var timer: Timer
 @export var stage_platform: StagePlatform
 @export var timer_label: Label
+@export var progress_bar: TextureProgressBar
 @export var curtain_anim: AnimationPlayer
 @export var player: Player
 
@@ -24,6 +25,7 @@ var stage: StageBase
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	timer.wait_time = time
+	progress_bar.max_value = time
 	stage = pick_stage()
 	stage.stage_complete.connect(_on_stage_end)
 	stage.start_stage(stage_platform, player)
@@ -32,6 +34,9 @@ func _ready():
 	
 func _process(delta):
 	timer_label.text = str(ceil(timer.time_left))
+	var color: float = timer.time_left / time
+	progress_bar.tint_progress = Color(1 - color, color, 0)
+	progress_bar.value = timer.time_left
 	
 	if timer.is_stopped():
 		get_tree().change_scene_to_file("res://win.tscn")

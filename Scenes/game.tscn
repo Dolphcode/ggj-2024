@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=23 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://0uewps4rbocq" path="res://Scenes/Environment/grid_tile.tscn" id="12_6ev3m"]
 [ext_resource type="Texture2D" uid="uid://bhak4bs0vbnjm" path="res://Assets/Sprites/Icons/tv_head.png" id="12_pgrxw"]
 [ext_resource type="FontFile" uid="uid://catrlte1ef2sj" path="res://Assets/Fonts/FeENrm2.ttf" id="13_vvoco"]
+[ext_resource type="Texture2D" uid="uid://yiy5u8yjq6rc" path="res://Assets/Sprites/UI/ui_timer.png" id="14_jbp25"]
 
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
@@ -129,7 +130,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
@@ -137,7 +138,8 @@ level_two = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
 level_three = [NodePath("1Banana"), NodePath("1Banana2"), NodePath("1Banana3")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
-timer_label = NodePath("../CanvasLayer/Label")
+timer_label = NodePath("../CanvasLayer/TimerLabel")
+progress_bar = NodePath("../CanvasLayer/TextureProgressBar")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
 player = NodePath("../StagePlatform/Player")
 dialog_anim = NodePath("../CanvasLayer/DialogueSnippet/Dialog")
@@ -193,15 +195,18 @@ position = Vector2(174, 38)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("9_y8q1r")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -152.0
-offset_bottom = 54.0
+offset_left = -97.0
+offset_top = 40.0
+offset_right = -36.0
+offset_bottom = 94.0
 grow_horizontal = 0
 text = "TIMER"
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DialogueSnippet" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -287,5 +292,21 @@ autowrap_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_361nu")
 }
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 16.0
+offset_right = 394.0
+offset_bottom = 528.0
+grow_horizontal = 0
+scale = Vector2(0.2, 0.2)
+step = 0.01
+fill_mode = 4
+texture_under = ExtResource("14_jbp25")
+texture_progress = ExtResource("14_jbp25")
+tint_progress = Color(0.301961, 1, 0.25098, 1)
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
