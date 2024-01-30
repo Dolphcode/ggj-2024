@@ -7,6 +7,8 @@ extends CharacterBody3D
 @onready var sprite3d = $Sprite3D
 
 signal hurt
+signal walking
+signal stop_walking
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -24,9 +26,6 @@ func _process(_delta):
 		$HurtBox/CollisionShape3D.disabled = false
 		sprite3d.modulate = Color(1,1,1,1)
 	
-	if $LaughTrackTimer.is_stopped():
-		$LaughTrack.play()
-
 
 func _physics_process(delta):
 	if (LevelTransitionChecker.transitioning):
@@ -48,10 +47,10 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
-		$Walking.play()
+		walking.emit()
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		$Walking.stop()
+		stop_walking.emit()
 	sprite3d.flip_h = false if velocity.x < 0 else (true if velocity.x > 0 else sprite3d.flip_h)
 
 	move_and_slide()
@@ -59,11 +58,9 @@ func _physics_process(delta):
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("Enemy"):
 		health -= 1
-		$PlayerHurt.play()
 		sprite3d.modulate = Color(1,0,0,1)
 		print(health)
 		$HurtTimer.start()
-		$LaughTrackTimer.start()
 		
 func jump_force():
 	velocity.y = JUMP_VELOCITY

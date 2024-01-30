@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=28 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://wrvvbfajdy50" path="res://Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3" id="15_jahj7"]
 [ext_resource type="AudioStream" uid="uid://bdefxemaakiil" path="res://Sounds/SoundEffects/oof-sound-effect-147492.mp3" id="16_infmb"]
 [ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="17_nbbvy"]
+[ext_resource type="Script" path="res://Scenes/Walking.gd" id="18_8f1m0"]
 
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
@@ -345,13 +346,20 @@ offset_bottom = 193.0
 editor_description = "Music provided by Stock Music Links (stockmusiclinks.com)
 Licensed under CC BY 4.0: creativecommons.org/licenses/by/4.0/"
 stream = ExtResource("15_jahj7")
-autoplay = true
 
 [node name="PlayerHurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_infmb")
 
 [node name="Walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_nbbvy")
+script = ExtResource("18_8f1m0")
+
+[node name="LaughtTrack" type="AudioStreamPlayer" parent="."]
+
+[node name="LaughTrackTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="StagePlatform/Player" to="UI/HeartContainer" method="_on_player_hurt"]
+[connection signal="stop_walking" from="StagePlatform/Player" to="Walking" method="_on_player_stop_walking"]
+[connection signal="walking" from="StagePlatform/Player" to="Walking" method="_on_player_walking"]
