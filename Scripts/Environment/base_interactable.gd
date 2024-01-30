@@ -1,11 +1,13 @@
+class_name BaseInteractable
 extends Node3D
 
+# For testing if a player has walked into this guy
+const PlayerClass = preload("res://Scripts/player.gd")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+signal player_interact(interact)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_interactable_body_entered(body):
+	if body is PlayerClass:
+		emit_signal("player_interact", self)
+		queue_free()

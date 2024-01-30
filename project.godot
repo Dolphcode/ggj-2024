@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Global Game Jam 2024"
-run/main_scene="res://Scenes/game.tscn"
+run/main_scene="res://start_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
@@ -50,3 +50,7 @@ jump={
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="EnemyHead"
 3d_physics/layer_5="Wall"
+
+[physics]
+
+3d/default_gravity=40.0

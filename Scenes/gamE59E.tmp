@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://5qid108f1ska"]
+
+[ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
+[ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="2_pwj11"]
+[ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_3osvo"]
+[ext_resource type="PackedScene" uid="uid://hddej23e7axi" path="res://Enemies/Scenes/parent_enemy.tscn" id="3_7yumb"]
+[ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
+[ext_resource type="Script" path="res://Scripts/Levels/stage_base.gd" id="5_0temo"]
+[ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
+[ext_resource type="Script" path="res://Scenes/HeartContainer.gd" id="6_6tgbd"]
+[ext_resource type="PackedScene" uid="uid://cw71uxwrs2lbp" path="res://Scenes/Stages/test_stage.tscn" id="6_eh5rh"]
+[ext_resource type="Script" path="res://Scripts/Levels/stage_hunting.gd" id="7_rdpkj"]
+[ext_resource type="PackedScene" uid="uid://dk1trfyil1lep" path="res://Scenes/Objectives/base_objective.tscn" id="11_ifhv8"]
+
+[sub_resource type="Environment" id="Environment_sprrj"]
+background_mode = 2
+ambient_light_source = 1
+reflected_light_source = 1
+
+[node name="Game" type="Node3D"]
+
+[node name="Stage" parent="." instance=ExtResource("1_gxsmk")]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stage"]
+
+[node name="Player" parent="." instance=ExtResource("2_pwj11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="ParentEnemy" parent="." instance=ExtResource("3_7yumb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12694, 0.603127, 0)
+
+[node name="StagePlatform" parent="." instance=ExtResource("4_hrlmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
+dimensions = Vector2i(4, 3)
+plat_scale = 5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sprrj")
+
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "timer", "stage_platform", "timer_label")]
+script = ExtResource("5_kgk5b")
+level_one = [NodePath("TestEnemyStage")]
+timer = NodePath("Timer")
+stage_platform = NodePath("../StagePlatform")
+timer_label = NodePath("../CanvasLayer/Label")
+
+[node name="TestStage" parent="LevelLoader" instance=ExtResource("6_eh5rh")]
+
+[node name="Timer" type="Timer" parent="LevelLoader"]
+
+[node name="TestEnemyStage" type="Node" parent="LevelLoader"]
+script = ExtResource("7_rdpkj")
+spawns = Array[String](["res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn", "res://Enemies/Scenes/parent_enemy.tscn"])
+target_idx = Array[int]([0])
+grid_info = "res://Assets/Grid Info/sample2.txt"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_0temo")
+grid_info = "res://Assets/Grid Info/sample.txt"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_6tgbd")
+
+[node name="Heart1" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
+position = Vector2(37, 40.5)
+scale = Vector2(0.515625, 0.492188)
+texture = ExtResource("3_3osvo")
+
+[node name="Heart2" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
+position = Vector2(104, 40)
+scale = Vector2(0.515625, 0.492188)
+texture = ExtResource("3_3osvo")
+
+[node name="Heart3" type="Sprite2D" parent="CanvasLayer/HeartContainer"]
+position = Vector2(174, 38)
+scale = Vector2(0.515625, 0.492188)
+texture = ExtResource("3_3osvo")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_bottom = 54.0
+grow_horizontal = 0
+text = "TIMER"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StaticBody3D" parent="." instance=ExtResource("11_ifhv8")]
+
+[connection signal="hurt" from="Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]

@@ -1,3 +1,4 @@
+class_name HeartContainer
 extends HBoxContainer
 
 
@@ -18,4 +19,3 @@ func _on_player_hurt(health):
 		$Heart2.visible = false
 	else:
 		$Heart1.visible = false
-	pass # Replace with function body.
