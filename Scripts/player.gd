@@ -55,6 +55,7 @@ func _physics_process(delta):
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("Enemy"):
 		health -= 1
+		$PlayerHurt.play()
 		sprite3d.modulate = Color(1,0,0,1)
 		print(health)
 		$HurtTimer.start()
