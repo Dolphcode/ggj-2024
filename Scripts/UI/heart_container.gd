@@ -15,6 +15,7 @@ func _process(delta):
 func _on_player_hurt(health):
 	if health == 2:
 		$Heart3.visible = false
+		$"../../PlayerHurt".play()
 	elif health == 1:
 		$Heart2.visible = false
 	else:
