@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3h2xtbk6r40c"]
+[gd_scene load_steps=8 format=3 uid="uid://c3h2xtbk6r40c"]
 
-[ext_resource type="Script" path="res://start_menu.gd" id="1_4cm8f"]
+[ext_resource type="Script" path="res://Scripts/UI/start_menu.gd" id="1_4cm8f"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_exe3v"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_af0gc"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="4_s6so5"]
+[ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="5_khtk5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xvh"]
 font_size = 100
@@ -79,6 +80,17 @@ text = "Quit"
 visible = false
 position = Vector2(922, 154)
 texture = ExtResource("4_s6so5")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = -467.0
+offset_right = 311.0
+grow_vertical = 0
+texture = ExtResource("5_khtk5")
+expand_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0

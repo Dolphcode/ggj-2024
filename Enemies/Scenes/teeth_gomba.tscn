@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ubmp3wp0e1b1"]
-
-[ext_resource type="PackedScene" uid="uid://hddej23e7axi" path="res://Enemies/Scenes/parent_enemy.tscn" id="1_f46bt"]
-
-[node name="TeethGomba" instance=ExtResource("1_f46bt")]

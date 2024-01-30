@@ -20,13 +20,13 @@ func _process(delta):
 	pass
 
 func toggle_tile(state, x, y):
-	print(tiles[y][x])
 	tiles[y][x].position.z = state if (state == 0 || state == 1) else 0
 
 func generate_platforms():
 	# Get rid of all exising children to regenerate tiles, this is the easiest approach
 	for child in get_children():
-		child.queue_free()
+		if child.name != "Player":
+			child.queue_free()
 	
 	var tile = load("res://Scenes/Environment/grid_tile.tscn")
 	for y in range(0, dimensions.y * plat_scale):

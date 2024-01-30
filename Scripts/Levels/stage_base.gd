@@ -3,18 +3,19 @@ extends Node
 
 signal stage_complete
 
+# Export Variables
 @export_category("Data")
-@export var grid_info: String
-@export var event_name: String = "Base Name"
-@export var event_dialog: String = "Eventing time!"
-@export var event_icon: String = "Oop"
-@export var event_character: String = "TVHead"
+@export var grid_info: String = "res://Assets/Grid Info/sample.txt" # This is the path to the level data text file
+@export var event_name: String = "Base Name" # This is the name of the event
+@export_multiline var event_objectives_text = "Objectives go here" # This is the list of objectives to be shown to the user
+@export var event_icon: String = "res://Assets/Sprites/Icons/tv_head.png" # This is the path to the character icon for the dialogue that appears for this event
+@export var event_character: String = "TV Guy" # This is the name of the character speaking when this event comes up
+@export_multiline var event_dialog: String = "Eventing time!" # This is the text that the character speaks when this event comes up
 
+# State
 var grid_info_arr = []
 var level_loader
-
 var is_loaded = false
-
 var icon : Texture
 
 func _ready():
@@ -56,7 +57,7 @@ func start_stage(stageplatform, player):
 				stageplatform.toggle_tile(0, j, grid_info_arr.size() - 1)
 				
 			if grid_info_arr[i][j] == "p":
-				player.position = Vector3(i, j, 1)
+				player.position = Vector3(j, i, player.position.z)
 
 func end_stage():
 	level_loader._on_stage_end()

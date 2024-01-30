@@ -1,3 +1,4 @@
+class_name HeartContainer
 extends HBoxContainer
 
 

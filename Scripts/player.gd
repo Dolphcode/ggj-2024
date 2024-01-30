@@ -12,6 +12,9 @@ signal hurt
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _process(_delta):
+	if (LevelTransitionChecker.transitioning):
+		return
+	
 	if health == 0:
 		get_tree().change_scene_to_file("res://game_over.tscn")
 	if !$HurtTimer.is_stopped():
@@ -24,8 +27,10 @@ func _process(_delta):
 
 
 func _physics_process(delta):
+	if (LevelTransitionChecker.transitioning):
+		return
 	
-	position.z = 0
+	position.z = 2
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -43,6 +48,7 @@ func _physics_process(delta):
 		velocity.x = direction.x * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	sprite3d.flip_h = false if velocity.x < 0 else (true if velocity.x > 0 else sprite3d.flip_h)
 
 	move_and_slide()
 
