@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkn75v3agwkpt"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/Lobbing/object_lobber.gd" id="1_nbrv5"]
+[ext_resource type="PackedScene" uid="uid://bdoak84vr7p62" path="res://Scenes/Environment/Lobber/projectiles.tscn" id="2_5kc2u"]
+
+[node name="ObjectLobber" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.38689)
+script = ExtResource("1_nbrv5")
+projectile = ExtResource("2_5kc2u")
+
+[node name="ProjectileLobTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="ProjectileLobTimer" to="." method="_on_projectile_lob_timer_timeout"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=30 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
 [ext_resource type="Texture2D" uid="uid://4frpgw4qpx1a" path="res://Assets/Sprites/CurtainTop.png" id="4_hfyyo"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
+[ext_resource type="PackedScene" uid="uid://dkn75v3agwkpt" path="res://Scenes/Environment/Lobber/object_lobber.tscn" id="5_h6dij"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="6_6tgbd"]
 [ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="6_txnew"]
@@ -115,7 +116,7 @@ shaded = true
 alpha_cut = 2
 texture = ExtResource("3_j5kwj")
 
-[node name="RightCurtain2" type="Sprite3D" parent="Stage"]
+[node name="TopCurtain" type="Sprite3D" parent="Stage"]
 transform = Transform3D(0.8, 0, 0, 0, 0.949433, 0, 0, 0, 0.8, 0.420013, 5.56571, 4.04057)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
@@ -126,6 +127,36 @@ texture = ExtResource("4_hfyyo")
 libraries = {
 "": SubResource("AnimationLibrary_kya12")
 }
+
+[node name="ObjectLobber" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber3" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31991, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber4" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63981, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber2" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31991, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber5" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63981, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
 
 [node name="LeftWall" parent="." instance=ExtResource("12_6ev3m")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -19.4855, 4.75245, -17.495)
