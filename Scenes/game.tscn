@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=17 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
-[ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="2_pwj11"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_3osvo"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
@@ -113,13 +112,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
 dimensions = Vector2i(4, 3)
 plat_scale = 5
 
-[node name="Player" parent="StagePlatform" instance=ExtResource("2_pwj11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1.56296)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "curtain_anim", "dialog_anim", "dialog_text", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("1Banana")]
@@ -129,7 +125,6 @@ timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../CanvasLayer/Label")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
-player = NodePath("../StagePlatform/Player")
 dialog_anim = NodePath("../CanvasLayer/Dialogue Snippet/Dialog")
 dialog_text = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/Label")
 dialog_texture = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/TextureRect")
@@ -275,4 +270,3 @@ placeholder_text = "Objective 2"
 expand_to_text_length = true
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
-[connection signal="hurt" from="StagePlatform/Player" to="CanvasLayer/HeartContainer" method="_on_player_hurt"]
