@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=29 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
+[ext_resource type="Texture2D" uid="uid://4frpgw4qpx1a" path="res://Assets/Sprites/CurtainTop.png" id="4_hfyyo"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="6_6tgbd"]
@@ -113,6 +114,13 @@ modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
 texture = ExtResource("3_j5kwj")
+
+[node name="RightCurtain2" type="Sprite3D" parent="Stage"]
+transform = Transform3D(0.8, 0, 0, 0, 0.949433, 0, 0, 0, 0.8, 0.420013, 5.56571, 4.04057)
+modulate = Color(0.517647, 0.517647, 0.517647, 1)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_hfyyo")
 
 [node name="CurtainAnimation" type="AnimationPlayer" parent="Stage"]
 libraries = {
@@ -346,6 +354,7 @@ offset_bottom = 193.0
 editor_description = "Music provided by Stock Music Links (stockmusiclinks.com)
 Licensed under CC BY 4.0: creativecommons.org/licenses/by/4.0/"
 stream = ExtResource("15_jahj7")
+autoplay = true
 
 [node name="PlayerHurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_infmb")
