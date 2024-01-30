@@ -143,18 +143,12 @@ stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../UI/TimerLabel")
 progress_bar = NodePath("../UI/TextureProgressBar")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
-<<<<<<< HEAD
-dialog_anim = NodePath("../CanvasLayer/Dialogue Snippet/Dialog")
-dialog_text = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/Label")
-dialog_texture = NodePath("../CanvasLayer/Dialogue Snippet/Dialog Box/TextureRect")
-=======
 player = NodePath("../StagePlatform/Player")
 dialog_anim = NodePath("../UI/DialogueSnippet/Dialog")
 dialog_text = NodePath("../UI/DialogueSnippet/DialogBox/MiniDialogue")
 dialog_name = NodePath("../UI/DialogueSnippet/DialogBox/SpeakerName")
 objective_list = NodePath("../UI/ObjectiveList/ObjectivesLabel")
 dialog_texture = NodePath("../UI/DialogueSnippet/DialogBox/CharacterIcon")
->>>>>>> 71b24fce2c0d409becabfdb8a38673d40b46219f
 
 [node name="Timer" type="Timer" parent="LevelLoader"]
 wait_time = 30.0
