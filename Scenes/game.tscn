@@ -16,11 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://bhak4bs0vbnjm" path="res://Assets/Sprites/Icons/tv_head.png" id="12_pgrxw"]
 [ext_resource type="FontFile" uid="uid://catrlte1ef2sj" path="res://Assets/Fonts/FeENrm2.ttf" id="13_vvoco"]
 [ext_resource type="Texture2D" uid="uid://yiy5u8yjq6rc" path="res://Assets/Sprites/UI/ui_timer.png" id="14_jbp25"]
-[ext_resource type="AudioStream" uid="uid://wrvvbfajdy50" path="res://Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3" id="15_jahj7"]
-[ext_resource type="AudioStream" uid="uid://bdefxemaakiil" path="res://Sounds/SoundEffects/oof-sound-effect-147492.mp3" id="16_infmb"]
 [ext_resource type="Texture2D" uid="uid://cmoxelgxv3ls7" path="res://Assets/Sprites/UI/Player_Agent_Cool_Full_Body_Color_01.png" id="17_jvfra"]
-[ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="17_nbbvy"]
+[ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Assets/Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="17_nbbvy"]
+[ext_resource type="AudioStream" uid="uid://b6k3crtkg0veb" path="res://Assets/Sounds/Music/Kevin MacLeod_ The Show Must Be Go.wav" id="17_oxp61"]
 [ext_resource type="Script" path="res://Scenes/Walking.gd" id="18_8f1m0"]
+[ext_resource type="AudioStream" uid="uid://duo478eas3vp3" path="res://Assets/Sounds/SoundEffects/hit_sfx.wav" id="18_36gjy"]
 [ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="18_spq36"]
 [ext_resource type="Script" path="res://Scripts/UI/dialogue_manager.gd" id="21_87vj8"]
 
@@ -227,7 +227,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "ui_layer", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "ui_layer", "stage_music", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("TVHost_Objective")]
@@ -240,6 +240,8 @@ progress_bar = NodePath("../UI/TextureProgressBar")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
 player = NodePath("../StagePlatform/Player")
 ui_layer = NodePath("../UI")
+stage_music = NodePath("../StageMusic")
+default_music_path = "res://Assets/Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3"
 dialog_anim = NodePath("../UI/DialogueSnippet/Dialog")
 dialog_text = NodePath("../UI/DialogueSnippet/DialogBox/MiniDialogue")
 dialog_name = NodePath("../UI/DialogueSnippet/DialogBox/SpeakerName")
@@ -438,11 +440,12 @@ offset_bottom = 193.0
 [node name="StageMusic" type="AudioStreamPlayer" parent="."]
 editor_description = "Music provided by Stock Music Links (stockmusiclinks.com)
 Licensed under CC BY 4.0: creativecommons.org/licenses/by/4.0/"
-stream = ExtResource("15_jahj7")
+stream = ExtResource("17_oxp61")
+volume_db = -6.215
 autoplay = true
 
 [node name="PlayerHurt" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_infmb")
+stream = ExtResource("18_36gjy")
 
 [node name="Walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_nbbvy")

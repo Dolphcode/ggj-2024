@@ -15,6 +15,10 @@ extends Node
 @export var curtain_anim: AnimationPlayer
 @export var player: Player
 @export var ui_layer: CanvasLayer
+@export var stage_music: AudioStreamPlayer
+
+@export_category("Sound Files")
+@export var default_music_path: String
 
 @export_category("Dialog")
 @export var dialog_anim: AnimationPlayer
@@ -24,8 +28,14 @@ extends Node
 @export var dialog_texture: TextureRect
 var stage: StageBase
 
+# Audio Files
+var default_music
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	default_music = load(default_music_path)
+	
+	ScoreKeeper.score = 0
 	timer.wait_time = time
 	progress_bar.max_value = time
 	stage = pick_stage()
@@ -40,6 +50,7 @@ func _process(delta):
 
 func _on_stage_end():
 	LevelTransitionChecker.transitioning = true
+	ScoreKeeper.score += 1
 	curtain_anim.play("Close")
 
 func pick_stage():
@@ -70,6 +81,8 @@ func show_dialog():
 
 func _on_start_animation_player_animation_finished(anim_name):
 	LevelTransitionChecker.transitioning = false
+	stage_music.stream = default_music
+	stage_music.play()
 	curtain_anim.play("Open")
 	stage.start_stage(stage_platform, player)
 	timer.start()

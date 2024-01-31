@@ -19,6 +19,7 @@ config/icon="res://Assets/Sprites/Icons/tv_head.png"
 [autoload]
 
 LevelTransitionChecker="*res://Scripts/Editor/level_transition_mode.gd"
+ScoreKeeper="*res://Scripts/Tracking/score_keeper.gd"
 
 [display]
 

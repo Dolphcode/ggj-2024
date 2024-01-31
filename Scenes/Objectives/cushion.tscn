@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://eine3lmydine"]
+
+[ext_resource type="PackedScene" uid="uid://dk1trfyil1lep" path="res://Scenes/Objectives/base_objective.tscn" id="1_r0pxw"]
+[ext_resource type="Texture2D" uid="uid://bdyqode61ah4d" path="res://Assets/Sprites/Objectives/gamejamobj.png" id="2_wykpj"]
+
+[node name="StaticBody3D" instance=ExtResource("1_r0pxw")]
+
+[node name="Sprite3D" parent="." index="2"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("2_wykpj")

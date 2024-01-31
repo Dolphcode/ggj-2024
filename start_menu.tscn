@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3y75nh3t7mkl"]
+[gd_scene load_steps=9 format=3 uid="uid://c3y75nh3t7mkl"]
 
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="1_1ydln"]
 [ext_resource type="Script" path="res://Scripts/UI/start_menu.gd" id="1_lquxl"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="2_a71gf"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_ysjac"]
 [ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="5_3stn4"]
+[ext_resource type="AudioStream" uid="uid://c4iimvia5mic8" path="res://Assets/Sounds/Music/Kevin MacLeod_ Happy Happy Game Show.wav" id="6_ybsyh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xvh"]
 font_size = 100
@@ -112,6 +113,13 @@ offset_right = 311.0
 grow_vertical = 0
 texture = ExtResource("5_3stn4")
 expand_mode = 1
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+editor_description = "Music provided by Stock Music Links (stockmusiclinks.com)
+Licensed under CC BY 4.0: creativecommons.org/licenses/by/4.0/"
+stream = ExtResource("6_ybsyh")
+volume_db = -9.06
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Start_Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Setting_Button" to="." method="_on_setting_button_pressed"]

@@ -9,18 +9,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if $"../../LaughTrackTimer".is_stopped():
-		$"../../LaughtTrack".play()
+	pass
 
 func _on_player_hurt(health):
 	if health == 2:
 		$Heart3.visible = false
-		if $"../../PlayerHurt".playing():
-			$"../../PlayerHurt".play()
-		$"../../LaughTrackTimer".start()
 	elif health == 1:
 		$Heart2.visible = false
-		$"../../PlayerHurt".playing()
-		$"../../LaughTrackTimer".start()
 	else:
 		$Heart1.visible = false
