@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=38 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://duo478eas3vp3" path="res://Assets/Sounds/SoundEffects/hit_sfx.wav" id="18_36gjy"]
 [ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="18_spq36"]
 [ext_resource type="Script" path="res://Scripts/UI/dialogue_manager.gd" id="21_87vj8"]
+[ext_resource type="Texture2D" uid="uid://tomtit6pe6ag" path="res://Assets/Sprites/UI/zoomeffect.png" id="24_7yf85"]
 
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
@@ -107,7 +108,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../IntroLayer/CountdownLabel:scale")
+tracks/0/path = NodePath("../TransitionLayer/CountdownLabel:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,7 +120,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../IntroLayer/CountdownLabel:modulate")
+tracks/1/path = NodePath("../TransitionLayer/CountdownLabel:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -131,7 +132,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../IntroLayer/CountdownLabel:text")
+tracks/2/path = NodePath("../TransitionLayer/CountdownLabel:text")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -141,9 +142,50 @@ tracks/2/keys = {
 "values": ["3", "2", "1", "1"]
 }
 
+[sub_resource type="Animation" id="Animation_ukbu2"]
+resource_name = "game_end"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransitionLayer/ZoomEffect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, 20), Vector2(20, 20), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransitionLayer/Border:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../TransitionLayer/FadeOut:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.5, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3yeir"]
 _data = {
-"countdown": SubResource("Animation_15jnb")
+"countdown": SubResource("Animation_15jnb"),
+"game_end": SubResource("Animation_ukbu2")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_1y2hk"]
@@ -221,18 +263,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
 dimensions = Vector2i(4, 3)
 plat_scale = 5
 
-[node name="Player" parent="StagePlatform" instance=ExtResource("6_txnew")]
+[node name="Player" parent="StagePlatform" node_paths=PackedStringArray("level_loader") instance=ExtResource("6_txnew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
+level_loader = NodePath("../../LevelLoader")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "ui_layer", "stage_music", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "ui_layer", "stage_music", "transition_anim_player", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("TVHost_Objective")]
-level_two = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
-level_three = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
+level_two = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective"), NodePath("Invasion")]
+level_three = [NodePath("Agent_Objective"), NodePath("Grandma_Objective"), NodePath("Invasion")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../UI/TimerLabel")
@@ -241,6 +284,7 @@ curtain_anim = NodePath("../Stage/CurtainAnimation")
 player = NodePath("../StagePlatform/Player")
 ui_layer = NodePath("../UI")
 stage_music = NodePath("../StageMusic")
+transition_anim_player = NodePath("../TransitionLayer/TransitionAnimationPlayer")
 default_music_path = "res://Assets/Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3"
 dialog_anim = NodePath("../UI/DialogueSnippet/Dialog")
 dialog_text = NodePath("../UI/DialogueSnippet/DialogBox/MiniDialogue")
@@ -258,6 +302,7 @@ collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scen
 grid_info = "res://Assets/Grid Info/Diff 1/bananas.txt"
 event_objectives_text = "Collect all bananas
 Don't get lost"
+event_character = "Host"
 event_dialog = "I'm going bananaaaas! Better go get those banananaaaaas!"
 
 [node name="Agent_Objective" type="Node" parent="LevelLoader"]
@@ -265,7 +310,9 @@ script = ExtResource("8_y8ohe")
 spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn"])
 collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
 grid_info = "res://Assets/Grid Info/Diff 1/groceries.txt"
+event_objectives_text = "Gather all of your groceries (also bananas)"
 event_icon = "res://Assets/Sprites/Icons/agent47.png"
+event_character = "Player"
 event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
 
 [node name="Grandma_Objective" type="Node" parent="LevelLoader"]
@@ -273,8 +320,20 @@ script = ExtResource("9_gili5")
 spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/teeth_gomba.tscn"])
 target_idx = Array[int]([2])
 grid_info = "res://Assets/Grid Info/Diff 1/dentures.txt"
+event_objectives_text = "Stomp on grandma's dentures"
 event_icon = "res://Assets/Sprites/Icons/gramma.png"
+event_character = "Random Granny"
 event_dialog = "Oh honey dear! I seem to have lost my dentures. Could you fetch them for me"
+
+[node name="Invasion" type="Node" parent="LevelLoader"]
+script = ExtResource("9_gili5")
+spawns = Array[String](["res://Scenes/Enemies/shroom_soy.tscn", "res://Scenes/Enemies/shroom_soy.tscn", "res://Scenes/Enemies/shroom_soy.tscn"])
+target_idx = Array[int]([2, 0, 1])
+grid_info = "res://Assets/Grid Info/Diff 1/dentures.txt"
+event_objectives_text = "Stop the stage invaders!"
+event_icon = "res://Assets/Sprites/Icons/shroomsoy.png"
+event_character = "Freeman"
+event_dialog = "We cannot be stopped"
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
@@ -456,9 +515,9 @@ script = ExtResource("18_8f1m0")
 [node name="LaughTrackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="IntroLayer" type="CanvasLayer" parent="."]
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
 
-[node name="IntroDialogue" type="Control" parent="IntroLayer" node_paths=PackedStringArray("dialogue_text_label", "dialogue_speaker_label", "speaker0", "speaker1", "start_animation_player")]
+[node name="IntroDialogue" type="Control" parent="TransitionLayer" node_paths=PackedStringArray("dialogue_text_label", "dialogue_speaker_label", "speaker0", "speaker1", "start_animation_player")]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -475,10 +534,10 @@ dialogue_text_label = NodePath("DialogueBox/DialogueText")
 dialogue_speaker_label = NodePath("DialogueBox/SpeakerText")
 speaker0 = NodePath("HostPortrait")
 speaker1 = NodePath("PlayerPortrait")
-start_animation_player = NodePath("../StartAnimationPlayer")
+start_animation_player = NodePath("../TransitionAnimationPlayer")
 dialogue_contents_path = "res://Assets/Data/Dialogue/intro.txt"
 
-[node name="PlayerPortrait" type="TextureRect" parent="IntroLayer/IntroDialogue"]
+[node name="PlayerPortrait" type="TextureRect" parent="TransitionLayer/IntroDialogue"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -490,7 +549,7 @@ grow_vertical = 0
 texture = ExtResource("17_jvfra")
 expand_mode = 1
 
-[node name="HostPortrait" type="TextureRect" parent="IntroLayer/IntroDialogue"]
+[node name="HostPortrait" type="TextureRect" parent="TransitionLayer/IntroDialogue"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -505,7 +564,7 @@ grow_vertical = 0
 texture = ExtResource("18_spq36")
 expand_mode = 1
 
-[node name="DialogueBox" type="Control" parent="IntroLayer/IntroDialogue"]
+[node name="DialogueBox" type="Control" parent="TransitionLayer/IntroDialogue"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -518,7 +577,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Background" type="ColorRect" parent="IntroLayer/IntroDialogue/DialogueBox"]
+[node name="Background" type="ColorRect" parent="TransitionLayer/IntroDialogue/DialogueBox"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -533,7 +592,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0.345098, 1)
 
-[node name="Foreground" type="ColorRect" parent="IntroLayer/IntroDialogue/DialogueBox"]
+[node name="Foreground" type="ColorRect" parent="TransitionLayer/IntroDialogue/DialogueBox"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -549,7 +608,7 @@ grow_vertical = 2
 scale = Vector2(0.962814, 0.825147)
 color = Color(0, 0, 0, 1)
 
-[node name="DialogueText" type="Label" parent="IntroLayer/IntroDialogue/DialogueBox"]
+[node name="DialogueText" type="Label" parent="TransitionLayer/IntroDialogue/DialogueBox"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -564,7 +623,7 @@ grow_horizontal = 2
 grow_vertical = 0
 autowrap_mode = 3
 
-[node name="DirectionsText" type="Label" parent="IntroLayer/IntroDialogue/DialogueBox"]
+[node name="DirectionsText" type="Label" parent="TransitionLayer/IntroDialogue/DialogueBox"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -579,7 +638,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Press E to continue, Press ESC to skip"
 
-[node name="SpeakerText" type="Label" parent="IntroLayer/IntroDialogue/DialogueBox"]
+[node name="SpeakerText" type="Label" parent="TransitionLayer/IntroDialogue/DialogueBox"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -595,13 +654,13 @@ grow_vertical = 0
 text = "TV Head
 "
 
-[node name="StartAnimationPlayer" type="AnimationPlayer" parent="IntroLayer"]
+[node name="TransitionAnimationPlayer" type="AnimationPlayer" parent="TransitionLayer"]
 root_node = NodePath("../../UI")
 libraries = {
 "": SubResource("AnimationLibrary_3yeir")
 }
 
-[node name="CountdownLabel" type="Label" parent="IntroLayer"]
+[node name="CountdownLabel" type="Label" parent="TransitionLayer"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -616,13 +675,65 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 pivot_offset = Vector2(27.5, 80)
-text = "1"
+text = "3"
 label_settings = SubResource("LabelSettings_1y2hk")
 horizontal_alignment = 1
+
+[node name="ZoomEffect" type="TextureRect" parent="TransitionLayer"]
+offset_left = -1028.0
+offset_top = -544.0
+offset_right = 2172.0
+offset_bottom = 1256.0
+scale = Vector2(20, 20)
+pivot_offset = Vector2(1591, 898)
+texture = ExtResource("24_7yf85")
+
+[node name="FadeOut" type="ColorRect" parent="TransitionLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 1181.0
+offset_bottom = 682.0
+color = Color(0, 0, 0, 1)
+
+[node name="Border" type="Control" parent="TransitionLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_right = 437.0
+offset_bottom = 661.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_left = 688.0
+offset_right = 1170.0
+offset_bottom = 661.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_left = -22.0
+offset_right = 1170.0
+offset_bottom = 289.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 427.0
+offset_right = 1170.0
+offset_bottom = 672.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="StagePlatform/Player" to="UI/HeartContainer" method="_on_player_hurt"]
 [connection signal="stop_walking" from="StagePlatform/Player" to="Walking" method="_on_player_stop_walking"]
 [connection signal="walking" from="StagePlatform/Player" to="Walking" method="_on_player_walking"]
 [connection signal="timeout" from="LevelLoader/Timer" to="LevelLoader" method="_on_timer_timeout"]
-[connection signal="animation_finished" from="IntroLayer/StartAnimationPlayer" to="LevelLoader" method="_on_start_animation_player_animation_finished"]
+[connection signal="animation_finished" from="TransitionLayer/TransitionAnimationPlayer" to="LevelLoader" method="_on_start_animation_player_animation_finished"]

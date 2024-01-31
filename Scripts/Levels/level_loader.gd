@@ -1,3 +1,4 @@
+class_name LevelLoader
 extends Node
 
 # This code is not ideal but it'll work for now
@@ -16,6 +17,7 @@ extends Node
 @export var player: Player
 @export var ui_layer: CanvasLayer
 @export var stage_music: AudioStreamPlayer
+@export var transition_anim_player: AnimationPlayer
 
 @export_category("Sound Files")
 @export var default_music_path: String
@@ -30,6 +32,7 @@ var stage: StageBase
 
 # Audio Files
 var default_music
+var game_over = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -80,14 +83,28 @@ func show_dialog():
 
 
 func _on_start_animation_player_animation_finished(anim_name):
-	LevelTransitionChecker.transitioning = false
-	stage_music.stream = default_music
-	stage_music.play()
-	curtain_anim.play("Open")
-	stage.start_stage(stage_platform, player)
-	timer.start()
-	show_dialog()
-	ui_layer.visible = true
+	if (anim_name == "countdown"):
+		LevelTransitionChecker.transitioning = false
+		stage_music.stream = default_music
+		stage_music.play()
+		curtain_anim.play("Open")
+		stage.start_stage(stage_platform, player)
+		timer.start()
+		show_dialog()
+		ui_layer.visible = true
+	elif (anim_name == "game_end"):
+		if (game_over):
+			get_tree().change_scene_to_file("res://game_over.tscn")
+		else:
+			get_tree().change_scene_to_file("res://win.tscn")
 
 func _on_timer_timeout():
-	get_tree().change_scene_to_file("res://win.tscn")
+	end_game(false)
+	
+func end_game(is_game_over):
+	game_over = is_game_over
+	LevelTransitionChecker.transitioning = true
+	timer.stop()
+	stage_music.stop()
+	transition_anim_player.play("game_end")
+	

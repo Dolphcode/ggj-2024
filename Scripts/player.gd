@@ -4,6 +4,9 @@ extends CharacterBody3D
 @export var health = 3
 @export var SPEED = 7.0
 @export var JUMP_VELOCITY = 18.0
+@export var level_loader: LevelLoader
+
+
 @onready var sprite3d = $Sprite3D
 
 signal hurt
@@ -18,7 +21,7 @@ func _process(_delta):
 		return
 	
 	if health == 0:
-		get_tree().change_scene_to_file("res://game_over.tscn")
+		level_loader.end_game(true)
 	if !$HurtTimer.is_stopped():
 		hurt.emit(health)
 		$HurtBox/CollisionShape3D.disabled = true
