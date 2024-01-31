@@ -14,6 +14,7 @@ extends Node
 @export var progress_bar: TextureProgressBar
 @export var curtain_anim: AnimationPlayer
 @export var player: Player
+@export var ui_layer: CanvasLayer
 
 @export_category("Dialog")
 @export var dialog_anim: AnimationPlayer
@@ -29,18 +30,13 @@ func _ready():
 	progress_bar.max_value = time
 	stage = pick_stage()
 	stage.stage_complete.connect(_on_stage_end)
-	stage.start_stage(stage_platform, player)
-	timer.start()
-	show_dialog()
+	LevelTransitionChecker.transitioning = true
 	
 func _process(delta):
 	timer_label.text = str(ceil(timer.time_left))
 	var color: float = timer.time_left / time
 	progress_bar.tint_progress = Color(1 - color, color, 0)
 	progress_bar.value = timer.time_left
-	
-	if timer.is_stopped():
-		get_tree().change_scene_to_file("res://win.tscn")
 
 func _on_stage_end():
 	LevelTransitionChecker.transitioning = true
@@ -70,3 +66,15 @@ func show_dialog():
 	dialog_texture.texture = stage.icon
 	objective_list.text = stage.event_objectives_text
 	dialog_anim.play("ShowDialog")
+
+
+func _on_start_animation_player_animation_finished(anim_name):
+	LevelTransitionChecker.transitioning = false
+	curtain_anim.play("Open")
+	stage.start_stage(stage_platform, player)
+	timer.start()
+	show_dialog()
+	ui_layer.visible = true
+
+func _on_timer_timeout():
+	get_tree().change_scene_to_file("res://win.tscn")

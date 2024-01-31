@@ -9,7 +9,7 @@ albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fbxqk"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ftcx0")
@@ -20,7 +20,7 @@ material = SubResource("StandardMaterial3D_h4c6e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_2nfdg")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 6
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=36 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
@@ -18,8 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://yiy5u8yjq6rc" path="res://Assets/Sprites/UI/ui_timer.png" id="14_jbp25"]
 [ext_resource type="AudioStream" uid="uid://wrvvbfajdy50" path="res://Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3" id="15_jahj7"]
 [ext_resource type="AudioStream" uid="uid://bdefxemaakiil" path="res://Sounds/SoundEffects/oof-sound-effect-147492.mp3" id="16_infmb"]
+[ext_resource type="Texture2D" uid="uid://cmoxelgxv3ls7" path="res://Assets/Sprites/UI/Player_Agent_Cool_Full_Body_Color_01.png" id="17_jvfra"]
 [ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="17_nbbvy"]
 [ext_resource type="Script" path="res://Scenes/Walking.gd" id="18_8f1m0"]
+[ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="18_spq36"]
+[ext_resource type="Script" path="res://Scripts/UI/dialogue_manager.gd" id="21_87vj8"]
 
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
@@ -98,19 +101,68 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_84ogf"]
 font = ExtResource("13_vvoco")
 
+[sub_resource type="Animation" id="Animation_15jnb"]
+resource_name = "countdown"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../IntroLayer/CountdownLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9, 1, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1.87857e-05, 1, 1e-05, 1, 1.87857e-05, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../IntroLayer/CountdownLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9, 1, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1e-05, 1, 1e-05, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../IntroLayer/CountdownLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05),
+"update": 1,
+"values": ["3", "2", "1", "1"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3yeir"]
+_data = {
+"countdown": SubResource("Animation_15jnb")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_1y2hk"]
+font = ExtResource("13_vvoco")
+font_size = 100
+
 [node name="Game" type="Node3D"]
 
 [node name="Stage" parent="." instance=ExtResource("1_gxsmk")]
 
 [node name="LeftCurtain" type="Sprite3D" parent="Stage"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -10.946, 5.748, 3.709)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.44633, 5.7484, 3.70924)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
 texture = ExtResource("2_khx6x")
 
 [node name="RightCurtain" type="Sprite3D" parent="Stage"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 11.567, 5.748, 3.709)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 5.76654, 5.7484, 3.70924)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
@@ -175,7 +227,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "ui_layer", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("TVHost_Objective")]
@@ -187,6 +239,7 @@ timer_label = NodePath("../UI/TimerLabel")
 progress_bar = NodePath("../UI/TextureProgressBar")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
 player = NodePath("../StagePlatform/Player")
+ui_layer = NodePath("../UI")
 dialog_anim = NodePath("../UI/DialogueSnippet/Dialog")
 dialog_text = NodePath("../UI/DialogueSnippet/DialogBox/MiniDialogue")
 dialog_name = NodePath("../UI/DialogueSnippet/DialogBox/SpeakerName")
@@ -222,6 +275,7 @@ event_icon = "res://Assets/Sprites/Icons/gramma.png"
 event_dialog = "Oh honey dear! I seem to have lost my dentures. Could you fetch them for me"
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HeartContainer" type="HBoxContainer" parent="UI"]
 offset_right = 40.0
@@ -399,7 +453,173 @@ script = ExtResource("18_8f1m0")
 [node name="LaughTrackTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="IntroLayer" type="CanvasLayer" parent="."]
+
+[node name="IntroDialogue" type="Control" parent="IntroLayer" node_paths=PackedStringArray("dialogue_text_label", "dialogue_speaker_label", "speaker0", "speaker1", "start_animation_player")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -577.0
+offset_top = -405.0
+offset_right = 575.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("21_87vj8")
+dialogue_text_label = NodePath("DialogueBox/DialogueText")
+dialogue_speaker_label = NodePath("DialogueBox/SpeakerText")
+speaker0 = NodePath("HostPortrait")
+speaker1 = NodePath("PlayerPortrait")
+start_animation_player = NodePath("../StartAnimationPlayer")
+dialogue_contents_path = "res://Assets/Data/Dialogue/intro.txt"
+
+[node name="PlayerPortrait" type="TextureRect" parent="IntroLayer/IntroDialogue"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -518.0
+offset_right = 305.0
+grow_vertical = 0
+texture = ExtResource("17_jvfra")
+expand_mode = 1
+
+[node name="HostPortrait" type="TextureRect" parent="IntroLayer/IntroDialogue"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -375.0
+offset_top = -620.0
+offset_right = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("18_spq36")
+expand_mode = 1
+
+[node name="DialogueBox" type="Control" parent="IntroLayer/IntroDialogue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="ColorRect" parent="IntroLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -170.0
+offset_right = 354.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0.345098, 1)
+
+[node name="Foreground" type="ColorRect" parent="IntroLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -353.0
+offset_top = -165.0
+offset_right = 375.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.962814, 0.825147)
+color = Color(0, 0, 0, 1)
+
+[node name="DialogueText" type="Label" parent="IntroLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -341.0
+offset_top = -141.0
+offset_right = 334.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+autowrap_mode = 3
+
+[node name="DirectionsText" type="Label" parent="IntroLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -341.0
+offset_top = -52.0
+offset_right = 334.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press E to continue, Press ESC to skip"
+
+[node name="SpeakerText" type="Label" parent="IntroLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -341.0
+offset_top = -173.0
+offset_right = 334.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TV Head
+"
+
+[node name="StartAnimationPlayer" type="AnimationPlayer" parent="IntroLayer"]
+root_node = NodePath("../../UI")
+libraries = {
+"": SubResource("AnimationLibrary_3yeir")
+}
+
+[node name="CountdownLabel" type="Label" parent="IntroLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -70.0
+offset_right = 27.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(27.5, 80)
+text = "1"
+label_settings = SubResource("LabelSettings_1y2hk")
+horizontal_alignment = 1
+
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="StagePlatform/Player" to="UI/HeartContainer" method="_on_player_hurt"]
 [connection signal="stop_walking" from="StagePlatform/Player" to="Walking" method="_on_player_stop_walking"]
 [connection signal="walking" from="StagePlatform/Player" to="Walking" method="_on_player_walking"]
+[connection signal="timeout" from="LevelLoader/Timer" to="LevelLoader" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="IntroLayer/StartAnimationPlayer" to="LevelLoader" method="_on_start_animation_player_animation_finished"]
