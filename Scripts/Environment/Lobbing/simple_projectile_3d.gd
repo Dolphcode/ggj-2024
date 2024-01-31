@@ -3,6 +3,10 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@export var model1: Node3D
+@export var model2: Node3D
+@export var model3: Node3D
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if LevelTransitionChecker.transitioning:
@@ -12,6 +16,14 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func lob(target):
+	var i = randi_range(1, 3)
+	if i == 1:
+		model1.visible = true
+	elif i == 2:
+		model2.visible = true
+	else:
+		model3.visible = true
+	
 	var t_pos = target.global_position
 	var pos = global_position
 	
