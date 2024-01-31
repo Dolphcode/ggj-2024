@@ -1,17 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://doarlubbhxj8p"]
+[gd_scene load_steps=12 format=3 uid="uid://doarlubbhxj8p"]
 
 [ext_resource type="Script" path="res://Scripts/UI/start_menu.gd" id="1_b3vm3"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_5g7cb"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_i62rk"]
 [ext_resource type="Texture2D" uid="uid://cmoxelgxv3ls7" path="res://Assets/Sprites/UI/Player_Agent_Cool_Full_Body_Color_01.png" id="4_6431i"]
 [ext_resource type="Script" path="res://Scripts/UI/Menus/score_reader.gd" id="4_e3ghn"]
+[ext_resource type="FontFile" uid="uid://bbddda6frqfjb" path="res://Assets/Fonts/Retrock.ttf" id="4_yphlv"]
+[ext_resource type="FontFile" uid="uid://catrlte1ef2sj" path="res://Assets/Fonts/FeENrm2.ttf" id="5_xeqdo"]
 [ext_resource type="AudioStream" uid="uid://e6sd5qm3sy5j" path="res://Assets/Sounds/Music/Sneaky Snitch.wav" id="6_qqesc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xvh"]
-font_size = 100
+font = ExtResource("4_yphlv")
+font_size = 200
 
 [sub_resource type="LabelSettings" id="LabelSettings_avudp"]
-font_size = 50
+font = ExtResource("5_xeqdo")
+font_size = 30
 
 [sub_resource type="Environment" id="Environment_swh4b"]
 background_mode = 2
@@ -41,12 +45,12 @@ texture = ExtResource("3_i62rk")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -104.0
-offset_top = 112.0
-offset_right = 106.0
-offset_bottom = 249.0
+offset_left = -208.0
+offset_top = 20.0
+offset_right = 210.0
+offset_bottom = 287.0
 grow_horizontal = 2
-text = "You Win!"
+text = "You Win"
 label_settings = SubResource("LabelSettings_t8xvh")
 horizontal_alignment = 1
 vertical_alignment = 1

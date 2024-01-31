@@ -1,14 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3y75nh3t7mkl"]
+[gd_scene load_steps=10 format=3 uid="uid://c3y75nh3t7mkl"]
 
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="1_1ydln"]
 [ext_resource type="Script" path="res://Scripts/UI/start_menu.gd" id="1_lquxl"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="2_a71gf"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="3_ysjac"]
+[ext_resource type="FontFile" uid="uid://bbddda6frqfjb" path="res://Assets/Fonts/Retrock.ttf" id="4_rppxt"]
 [ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="5_3stn4"]
 [ext_resource type="AudioStream" uid="uid://c4iimvia5mic8" path="res://Assets/Sounds/Music/Kevin MacLeod_ Happy Happy Game Show.wav" id="6_ybsyh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xvh"]
-font_size = 100
+font = ExtResource("4_rppxt")
+font_size = 220
 
 [sub_resource type="Environment" id="Environment_swh4b"]
 background_mode = 2
@@ -38,12 +40,12 @@ texture = ExtResource("2_a71gf")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -104.0
-offset_top = 112.0
-offset_right = 106.0
-offset_bottom = 249.0
+offset_left = -543.0
+offset_top = 3.0
+offset_right = 545.0
+offset_bottom = 253.0
 grow_horizontal = 2
-text = "Chuckle's Galore Live!"
+text = "Chuckles Galore Live"
 label_settings = SubResource("LabelSettings_t8xvh")
 horizontal_alignment = 1
 vertical_alignment = 1
