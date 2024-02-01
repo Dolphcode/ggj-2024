@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bal0yukqqplad"]
+[gd_scene load_steps=3 format=3 uid="uid://b0ptq67wt8w82"]
 
 [ext_resource type="PackedScene" uid="uid://dk1trfyil1lep" path="res://Scenes/Objectives/base_objective.tscn" id="1_jefh4"]
 [ext_resource type="Texture2D" uid="uid://6886taqx1nwx" path="res://Assets/Sprites/Objectives/banana.png" id="2_tqvsu"]
