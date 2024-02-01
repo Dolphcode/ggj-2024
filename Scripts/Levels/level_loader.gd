@@ -45,7 +45,7 @@ func _ready():
 	stage.stage_complete.connect(_on_stage_end)
 	LevelTransitionChecker.transitioning = true
 	
-func _process(delta):
+func _process(_delta):
 	timer_label.text = str(ceil(timer.time_left))
 	var color: float = timer.time_left / time
 	progress_bar.tint_progress = Color(1 - color, color, 0)
