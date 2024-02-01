@@ -43,7 +43,6 @@ func start_stage(stageplatform, player):
 		interact.player_interact.connect(_on_interact)
 		
 func end_stage():
-	var i = 0
 	while enemies.size() > 0:
 		var enemy = enemies[0]
 		enemies.remove_at(0)

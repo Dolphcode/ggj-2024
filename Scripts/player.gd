@@ -63,7 +63,6 @@ func _on_hurt_box_area_entered(area):
 		health -= 1
 		$"../../PlayerHurt".play() # Jank but it works
 		sprite3d.modulate = Color(1,0,0,1)
-		print(health)
 		$HurtTimer.start()
 		
 func jump_force():

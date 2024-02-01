@@ -13,7 +13,7 @@ func _ready():
 	projectile_timer.wait_time = randf_range(time_min, time_max)
 	projectile_timer.start()
 
-func _process(delta):
+func _process(_delta):
 	if LevelTransitionChecker.transitioning:
 		projectile_timer.paused = true
 	else:

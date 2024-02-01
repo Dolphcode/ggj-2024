@@ -315,6 +315,16 @@ event_icon = "res://Assets/Sprites/Icons/agent47.png"
 event_character = "Player"
 event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
 
+[node name="Agent_Objective2" type="Node" parent="LevelLoader"]
+script = ExtResource("8_y8ohe")
+spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn"])
+collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
+grid_info = "res://Assets/Grid Info/Diff 1/stage_invasion.txt"
+event_objectives_text = "Gather all of your groceries (also bananas)"
+event_icon = "res://Assets/Sprites/Icons/agent47.png"
+event_character = "Player"
+event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
+
 [node name="Grandma_Objective" type="Node" parent="LevelLoader"]
 script = ExtResource("9_gili5")
 spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/teeth_gomba.tscn"])

@@ -21,15 +21,15 @@ func _ready():
 	var content = file.get_as_text()
 		
 	var str_out = ""
-	for str in content.split("-"):
-		for sym in str.split(""):
+	for line in content.split("-"):
+		for sym in line.split(""):
 			if (sym.is_valid_int() || sym.is_valid_identifier() || sym == " " || "?!.,'".contains(sym)):
 				str_out += sym
 		dialogue.append(str_out)
 		str_out = ""
 	run_dialogue()
 
-func _process(delta):
+func _process(_delta):
 	if (!dialogue_complete):
 		if (Input.is_action_just_pressed("dialog")):
 			run_dialogue()

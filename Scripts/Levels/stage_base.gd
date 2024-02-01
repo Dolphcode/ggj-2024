@@ -30,19 +30,17 @@ func start_stage(stageplatform, player):
 		var content = file.get_as_text()
 		
 		var str_arr = []
-		for str in content.split("-"):
+		for line in content.split("-"):
 			var row = []
 			grid_info_arr.append([])
-			for sym in str.split(""):
+			for sym in line.split(""):
 				if (sym.is_valid_int() || sym.is_valid_identifier()):
 					row.append(sym)
 			str_arr.append(row)
 		
 		for i in range(0, str_arr.size()):
-			var str = ""
 			for j in range(0, str_arr[0].size()):
 				grid_info_arr[str_arr.size() - i - 1].append(str_arr[i][j])
-				str += str_arr[i][j]
 				if str_arr[i][j] == "1":
 					stageplatform.toggle_tile(1, j, str_arr.size() - i - 1)
 				else:

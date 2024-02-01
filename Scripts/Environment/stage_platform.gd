@@ -9,15 +9,9 @@ enum ScaleMode { HEIGHT, WIDTH }
 
 var tiles = []
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generate_platforms()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func toggle_tile(state, x, y):
 	tiles[y][x].position.z = state if (state == 0 || state == 1) else 0

@@ -30,7 +30,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if (LevelTransitionChecker.transitioning): # Customized pause mode type thing, hopefully this isn't too jank
 		return
 	
@@ -77,7 +77,7 @@ func _physics_process(delta):
 		velocity.x = direction.x * SPEED
 	move_and_slide()
 	
-func _on_wall_detection_body_entered(body):
+func _on_wall_detection_body_entered(_body):
 	if detect_Jump.is_colliding():
 		scale.x = scale.x * -1
 	else:
