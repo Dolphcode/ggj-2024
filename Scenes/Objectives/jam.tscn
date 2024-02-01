@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://u1n5smomhx68"]
+
+[ext_resource type="PackedScene" uid="uid://dk1trfyil1lep" path="res://Scenes/Objectives/base_objective.tscn" id="1_06i3h"]
+[ext_resource type="Texture2D" uid="uid://b2cormb7rxxqy" path="res://Assets/Sprites/Objectives/whoopiecushion.png" id="2_t7yff"]
+
+[node name="StaticBody3D" instance=ExtResource("1_06i3h")]
+
+[node name="Sprite3D" parent="." index="2"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("2_t7yff")

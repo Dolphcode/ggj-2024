@@ -1,13 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3h2xtbk6r40c"]
+[gd_scene load_steps=13 format=3 uid="uid://c3h2xtbk6r40c"]
 
 [ext_resource type="Script" path="res://Scripts/UI/start_menu.gd" id="1_4cm8f"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_exe3v"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_af0gc"]
+[ext_resource type="FontFile" uid="uid://bbddda6frqfjb" path="res://Assets/Fonts/Retrock.ttf" id="4_lxu53"]
 [ext_resource type="Texture2D" uid="uid://dli8ao3tpwxb2" path="res://Assets/icon.svg" id="4_s6so5"]
 [ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="5_khtk5"]
+[ext_resource type="Script" path="res://Scripts/UI/Menus/score_reader.gd" id="6_ipq4m"]
+[ext_resource type="AudioStream" uid="uid://e6sd5qm3sy5j" path="res://Assets/Sounds/Music/Sneaky Snitch.wav" id="7_0qvos"]
+[ext_resource type="FontFile" uid="uid://catrlte1ef2sj" path="res://Assets/Fonts/FeENrm2.ttf" id="7_omd42"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8xvh"]
-font_size = 100
+font = ExtResource("4_lxu53")
+font_size = 200
+
+[sub_resource type="LabelSettings" id="LabelSettings_j3clm"]
+font = ExtResource("7_omd42")
+font_size = 30
 
 [sub_resource type="Environment" id="Environment_swh4b"]
 background_mode = 2
@@ -37,10 +46,10 @@ texture = ExtResource("3_af0gc")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -104.0
-offset_top = 112.0
-offset_right = 106.0
-offset_bottom = 249.0
+offset_left = -218.0
+offset_top = 63.0
+offset_right = 220.0
+offset_bottom = 263.0
 grow_horizontal = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_t8xvh")
@@ -53,10 +62,10 @@ anchor_left = 0.474826
 anchor_top = 0.497685
 anchor_right = 0.474826
 anchor_bottom = 0.497685
-offset_left = -35.0
-offset_top = -50.5
-offset_right = 35.0
-offset_bottom = 50.5
+offset_left = -34.9996
+offset_top = -15.4999
+offset_right = 35.0004
+offset_bottom = 85.5001
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -67,10 +76,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Start_Button" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Start"
-
-[node name="Setting_Button" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "Settings"
 
 [node name="End_Button" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -91,6 +96,21 @@ offset_right = 311.0
 grow_vertical = 0
 texture = ExtResource("5_khtk5")
 expand_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_top = 198.0
+offset_right = 106.0
+offset_bottom = 335.0
+grow_horizontal = 2
+text = "Score"
+label_settings = SubResource("LabelSettings_j3clm")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_ipq4m")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -113,6 +133,12 @@ light_energy = 16.0
 spot_range = 46.1253
 spot_angle = 67.5
 
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+editor_description = "Music provided by Stock Music Links (stockmusiclinks.com)
+Licensed under CC BY 4.0: creativecommons.org/licenses/by/4.0/"
+stream = ExtResource("7_0qvos")
+volume_db = -2.845
+autoplay = true
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Start_Button" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Setting_Button" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/End_Button" to="." method="_on_end_button_pressed"]

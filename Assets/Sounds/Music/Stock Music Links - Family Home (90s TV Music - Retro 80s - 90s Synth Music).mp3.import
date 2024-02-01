@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wrvvbfajdy50"
+path="res://.godot/imported/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3-2590b18e305c84f4e88d129f8cb8d3e5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3"
+dest_files=["res://.godot/imported/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3-2590b18e305c84f4e88d129f8cb8d3e5.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

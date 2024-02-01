@@ -1,9 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://5qid108f1ska"]
+[gd_scene load_steps=38 format=3 uid="uid://5qid108f1ska"]
 
 [ext_resource type="PackedScene" uid="uid://bwneut6qlhu4b" path="res://Scenes/stage.tscn" id="1_gxsmk"]
 [ext_resource type="Texture2D" uid="uid://64xdi55ithqq" path="res://Assets/Sprites/Left_Curtain.png" id="2_khx6x"]
 [ext_resource type="Texture2D" uid="uid://c6ti0oshm7cj8" path="res://Assets/Sprites/Right_Curtain.png" id="3_j5kwj"]
+[ext_resource type="Texture2D" uid="uid://4frpgw4qpx1a" path="res://Assets/Sprites/CurtainTop.png" id="4_hfyyo"]
 [ext_resource type="PackedScene" uid="uid://chy1hd81v6r8y" path="res://Scenes/Environment/stage_platform.tscn" id="4_hrlmn"]
+[ext_resource type="PackedScene" uid="uid://dkn75v3agwkpt" path="res://Scenes/Environment/Lobber/object_lobber.tscn" id="5_h6dij"]
 [ext_resource type="Script" path="res://Scripts/Levels/level_loader.gd" id="5_kgk5b"]
 [ext_resource type="Script" path="res://Scripts/UI/heart_container.gd" id="6_6tgbd"]
 [ext_resource type="PackedScene" uid="uid://la3al4wownf8" path="res://Scenes/player.tscn" id="6_txnew"]
@@ -14,10 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://bhak4bs0vbnjm" path="res://Assets/Sprites/Icons/tv_head.png" id="12_pgrxw"]
 [ext_resource type="FontFile" uid="uid://catrlte1ef2sj" path="res://Assets/Fonts/FeENrm2.ttf" id="13_vvoco"]
 [ext_resource type="Texture2D" uid="uid://yiy5u8yjq6rc" path="res://Assets/Sprites/UI/ui_timer.png" id="14_jbp25"]
-[ext_resource type="AudioStream" uid="uid://wrvvbfajdy50" path="res://Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3" id="15_jahj7"]
-[ext_resource type="AudioStream" uid="uid://bdefxemaakiil" path="res://Sounds/SoundEffects/oof-sound-effect-147492.mp3" id="16_infmb"]
-[ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="17_nbbvy"]
+[ext_resource type="Texture2D" uid="uid://cmoxelgxv3ls7" path="res://Assets/Sprites/UI/Player_Agent_Cool_Full_Body_Color_01.png" id="17_jvfra"]
+[ext_resource type="AudioStream" uid="uid://b7ni72bv7o044" path="res://Assets/Sounds/SoundEffects/concrete-footsteps-6752.mp3" id="17_nbbvy"]
+[ext_resource type="AudioStream" uid="uid://b6k3crtkg0veb" path="res://Assets/Sounds/Music/Kevin MacLeod_ The Show Must Be Go.wav" id="17_oxp61"]
 [ext_resource type="Script" path="res://Scenes/Walking.gd" id="18_8f1m0"]
+[ext_resource type="AudioStream" uid="uid://duo478eas3vp3" path="res://Assets/Sounds/SoundEffects/hit_sfx.wav" id="18_36gjy"]
+[ext_resource type="Texture2D" uid="uid://d3ilodprg2qba" path="res://Assets/Sprites/UI/TV_Head_Character_Full_Body_Color_01.png" id="18_spq36"]
+[ext_resource type="Script" path="res://Scripts/UI/dialogue_manager.gd" id="21_87vj8"]
+[ext_resource type="Texture2D" uid="uid://tomtit6pe6ag" path="res://Assets/Sprites/UI/zoomeffect.png" id="24_7yf85"]
 
 [sub_resource type="Animation" id="Animation_7argu"]
 resource_name = "Close"
@@ -96,28 +102,155 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_84ogf"]
 font = ExtResource("13_vvoco")
 
+[sub_resource type="Animation" id="Animation_15jnb"]
+resource_name = "countdown"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransitionLayer/CountdownLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9, 1, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1.87857e-05, 1, 1e-05, 1, 1.87857e-05, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransitionLayer/CountdownLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9, 1, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1e-05, 1, 1e-05, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../TransitionLayer/CountdownLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05),
+"update": 1,
+"values": ["3", "2", "1", "1"]
+}
+
+[sub_resource type="Animation" id="Animation_ukbu2"]
+resource_name = "game_end"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransitionLayer/ZoomEffect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, 20), Vector2(20, 20), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransitionLayer/Border:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../TransitionLayer/FadeOut:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.5, 5.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3yeir"]
+_data = {
+"countdown": SubResource("Animation_15jnb"),
+"game_end": SubResource("Animation_ukbu2")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_1y2hk"]
+font = ExtResource("13_vvoco")
+font_size = 100
+
 [node name="Game" type="Node3D"]
 
 [node name="Stage" parent="." instance=ExtResource("1_gxsmk")]
 
 [node name="LeftCurtain" type="Sprite3D" parent="Stage"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -10.946, 5.748, 3.709)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.44633, 5.7484, 3.70924)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
 texture = ExtResource("2_khx6x")
 
 [node name="RightCurtain" type="Sprite3D" parent="Stage"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 11.567, 5.748, 3.709)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 5.76654, 5.7484, 3.70924)
 modulate = Color(0.517647, 0.517647, 0.517647, 1)
 shaded = true
 alpha_cut = 2
 texture = ExtResource("3_j5kwj")
 
+[node name="TopCurtain" type="Sprite3D" parent="Stage"]
+transform = Transform3D(0.8, 0, 0, 0, 0.949433, 0, 0, 0, 0.8, 0.420013, 5.56571, 4.04057)
+modulate = Color(0.517647, 0.517647, 0.517647, 1)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_hfyyo")
+
 [node name="CurtainAnimation" type="AnimationPlayer" parent="Stage"]
 libraries = {
 "": SubResource("AnimationLibrary_kya12")
 }
+
+[node name="ObjectLobber" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber3" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31991, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber4" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63981, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber2" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31991, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
+
+[node name="ObjectLobber5" parent="Stage" node_paths=PackedStringArray("player_ref") instance=ExtResource("5_h6dij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63981, 0, 9.23361)
+player_ref = NodePath("../../StagePlatform/Player")
+time_max = 4.0
+time_min = 10.0
 
 [node name="LeftWall" parent="." instance=ExtResource("12_6ev3m")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -19.4855, 4.75245, -17.495)
@@ -130,24 +263,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1.56296)
 dimensions = Vector2i(4, 3)
 plat_scale = 5
 
-[node name="Player" parent="StagePlatform" instance=ExtResource("6_txnew")]
+[node name="Player" parent="StagePlatform" node_paths=PackedStringArray("level_loader") instance=ExtResource("6_txnew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.54059)
+level_loader = NodePath("../../LevelLoader")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sprrj")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_one", "level_two", "level_three", "timer", "stage_platform", "timer_label", "progress_bar", "curtain_anim", "player", "ui_layer", "stage_music", "transition_anim_player", "dialog_anim", "dialog_text", "dialog_name", "objective_list", "dialog_texture")]
 process_mode = 3
 script = ExtResource("5_kgk5b")
 level_one = [NodePath("TVHost_Objective")]
-level_two = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
-level_three = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective")]
+level_two = [NodePath("TVHost_Objective"), NodePath("Agent_Objective"), NodePath("Grandma_Objective"), NodePath("Invasion")]
+level_three = [NodePath("Agent_Objective"), NodePath("Grandma_Objective"), NodePath("Invasion")]
 timer = NodePath("Timer")
 stage_platform = NodePath("../StagePlatform")
 timer_label = NodePath("../UI/TimerLabel")
 progress_bar = NodePath("../UI/TextureProgressBar")
 curtain_anim = NodePath("../Stage/CurtainAnimation")
 player = NodePath("../StagePlatform/Player")
+ui_layer = NodePath("../UI")
+stage_music = NodePath("../StageMusic")
+transition_anim_player = NodePath("../TransitionLayer/TransitionAnimationPlayer")
+default_music_path = "res://Assets/Sounds/Music/Stock Music Links - Family Home (90s TV Music - Retro 80s - 90s Synth Music).mp3"
 dialog_anim = NodePath("../UI/DialogueSnippet/Dialog")
 dialog_text = NodePath("../UI/DialogueSnippet/DialogBox/MiniDialogue")
 dialog_name = NodePath("../UI/DialogueSnippet/DialogBox/SpeakerName")
@@ -164,6 +302,7 @@ collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scen
 grid_info = "res://Assets/Grid Info/Diff 1/bananas.txt"
 event_objectives_text = "Collect all bananas
 Don't get lost"
+event_character = "Host"
 event_dialog = "I'm going bananaaaas! Better go get those banananaaaaas!"
 
 [node name="Agent_Objective" type="Node" parent="LevelLoader"]
@@ -171,7 +310,9 @@ script = ExtResource("8_y8ohe")
 spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn"])
 collectibles = Array[String](["res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn", "res://Scenes/Objectives/banana.tscn"])
 grid_info = "res://Assets/Grid Info/Diff 1/groceries.txt"
+event_objectives_text = "Gather all of your groceries (also bananas)"
 event_icon = "res://Assets/Sprites/Icons/agent47.png"
+event_character = "Player"
 event_dialog = "I gotta go get my groceries!!!!! Let's gooooo"
 
 [node name="Grandma_Objective" type="Node" parent="LevelLoader"]
@@ -179,10 +320,23 @@ script = ExtResource("9_gili5")
 spawns = Array[String](["res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/parent_enemy.tscn", "res://Scenes/Enemies/teeth_gomba.tscn"])
 target_idx = Array[int]([2])
 grid_info = "res://Assets/Grid Info/Diff 1/dentures.txt"
+event_objectives_text = "Stomp on grandma's dentures"
 event_icon = "res://Assets/Sprites/Icons/gramma.png"
+event_character = "Random Granny"
 event_dialog = "Oh honey dear! I seem to have lost my dentures. Could you fetch them for me"
 
+[node name="Invasion" type="Node" parent="LevelLoader"]
+script = ExtResource("9_gili5")
+spawns = Array[String](["res://Scenes/Enemies/shroom_soy.tscn", "res://Scenes/Enemies/shroom_soy.tscn", "res://Scenes/Enemies/shroom_soy.tscn"])
+target_idx = Array[int]([2, 0, 1])
+grid_info = "res://Assets/Grid Info/Diff 1/dentures.txt"
+event_objectives_text = "Stop the stage invaders!"
+event_icon = "res://Assets/Sprites/Icons/shroomsoy.png"
+event_character = "Freeman"
+event_dialog = "We cannot be stopped"
+
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HeartContainer" type="HBoxContainer" parent="UI"]
 offset_right = 40.0
@@ -345,10 +499,12 @@ offset_bottom = 193.0
 [node name="StageMusic" type="AudioStreamPlayer" parent="."]
 editor_description = "Music provided by Stock Music Links (stockmusiclinks.com)
 Licensed under CC BY 4.0: creativecommons.org/licenses/by/4.0/"
-stream = ExtResource("15_jahj7")
+stream = ExtResource("17_oxp61")
+volume_db = -6.215
+autoplay = true
 
 [node name="PlayerHurt" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_infmb")
+stream = ExtResource("18_36gjy")
 
 [node name="Walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_nbbvy")
@@ -359,7 +515,225 @@ script = ExtResource("18_8f1m0")
 [node name="LaughTrackTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+
+[node name="IntroDialogue" type="Control" parent="TransitionLayer" node_paths=PackedStringArray("dialogue_text_label", "dialogue_speaker_label", "speaker0", "speaker1", "start_animation_player")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -577.0
+offset_top = -405.0
+offset_right = 575.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("21_87vj8")
+dialogue_text_label = NodePath("DialogueBox/DialogueText")
+dialogue_speaker_label = NodePath("DialogueBox/SpeakerText")
+speaker0 = NodePath("HostPortrait")
+speaker1 = NodePath("PlayerPortrait")
+start_animation_player = NodePath("../TransitionAnimationPlayer")
+dialogue_contents_path = "res://Assets/Data/Dialogue/intro.txt"
+
+[node name="PlayerPortrait" type="TextureRect" parent="TransitionLayer/IntroDialogue"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -518.0
+offset_right = 305.0
+grow_vertical = 0
+texture = ExtResource("17_jvfra")
+expand_mode = 1
+
+[node name="HostPortrait" type="TextureRect" parent="TransitionLayer/IntroDialogue"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -375.0
+offset_top = -620.0
+offset_right = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("18_spq36")
+expand_mode = 1
+
+[node name="DialogueBox" type="Control" parent="TransitionLayer/IntroDialogue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="ColorRect" parent="TransitionLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -170.0
+offset_right = 354.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0.345098, 1)
+
+[node name="Foreground" type="ColorRect" parent="TransitionLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -353.0
+offset_top = -165.0
+offset_right = 375.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.962814, 0.825147)
+color = Color(0, 0, 0, 1)
+
+[node name="DialogueText" type="Label" parent="TransitionLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -341.0
+offset_top = -141.0
+offset_right = 334.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+autowrap_mode = 3
+
+[node name="DirectionsText" type="Label" parent="TransitionLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -341.0
+offset_top = -52.0
+offset_right = 334.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press E to continue, Press ESC to skip"
+
+[node name="SpeakerText" type="Label" parent="TransitionLayer/IntroDialogue/DialogueBox"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -341.0
+offset_top = -173.0
+offset_right = 334.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TV Head
+"
+
+[node name="TransitionAnimationPlayer" type="AnimationPlayer" parent="TransitionLayer"]
+root_node = NodePath("../../UI")
+libraries = {
+"": SubResource("AnimationLibrary_3yeir")
+}
+
+[node name="CountdownLabel" type="Label" parent="TransitionLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -70.0
+offset_right = 27.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(27.5, 80)
+text = "3"
+label_settings = SubResource("LabelSettings_1y2hk")
+horizontal_alignment = 1
+
+[node name="ZoomEffect" type="TextureRect" parent="TransitionLayer"]
+offset_left = -1028.0
+offset_top = -544.0
+offset_right = 2172.0
+offset_bottom = 1256.0
+scale = Vector2(20, 20)
+pivot_offset = Vector2(1591, 898)
+texture = ExtResource("24_7yf85")
+
+[node name="FadeOut" type="ColorRect" parent="TransitionLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 1181.0
+offset_bottom = 682.0
+color = Color(0, 0, 0, 1)
+
+[node name="Border" type="Control" parent="TransitionLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_right = 437.0
+offset_bottom = 661.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_left = 688.0
+offset_right = 1170.0
+offset_bottom = 661.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_left = -22.0
+offset_right = 1170.0
+offset_bottom = 289.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="TransitionLayer/Border"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 427.0
+offset_right = 1170.0
+offset_bottom = 672.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="animation_finished" from="Stage/CurtainAnimation" to="LevelLoader" method="_on_curtain_animation_animation_finished"]
 [connection signal="hurt" from="StagePlatform/Player" to="UI/HeartContainer" method="_on_player_hurt"]
 [connection signal="stop_walking" from="StagePlatform/Player" to="Walking" method="_on_player_stop_walking"]
 [connection signal="walking" from="StagePlatform/Player" to="Walking" method="_on_player_walking"]
+[connection signal="timeout" from="LevelLoader/Timer" to="LevelLoader" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="TransitionLayer/TransitionAnimationPlayer" to="LevelLoader" method="_on_start_animation_player_animation_finished"]

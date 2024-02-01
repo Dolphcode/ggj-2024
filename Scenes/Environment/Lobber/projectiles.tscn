@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdoak84vr7p62"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/Lobbing/simple_projectile_3d.gd" id="1_ftcx0"]
+[ext_resource type="PackedScene" uid="uid://ds5yxbxu7fs14" path="res://Assets/Models/Anvil.glb" id="2_p3awh"]
+[ext_resource type="PackedScene" uid="uid://dlx07kned6mfe" path="res://Assets/Models/Kreb.glb" id="3_h38qn"]
+[ext_resource type="PackedScene" uid="uid://djp3rvwa71wx5" path="res://Assets/Models/Tomat.glb" id="4_jtnnx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4c6e"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2nfdg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fbxqk"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("model1", "model2", "model3") groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ftcx0")
+model1 = NodePath("Model/Anvil")
+model2 = NodePath("Model/Krab")
+model3 = NodePath("Model/Tomat")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+visible = false
+material = SubResource("StandardMaterial3D_h4c6e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2nfdg")
+
+[node name="Area3D" type="Area3D" parent="." groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_fbxqk")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Anvil" parent="Model" instance=ExtResource("2_p3awh")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+
+[node name="Krab" parent="Model" instance=ExtResource("3_h38qn")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+
+[node name="Tomat" parent="Model" instance=ExtResource("4_jtnnx")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
